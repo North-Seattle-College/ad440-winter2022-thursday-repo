@@ -7,7 +7,7 @@ import os
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
     certLoc = input('Enter full path of Floop Firebase cert file: ')
-    gPath = os.path.exists(certLoc)
+    gPath = os.path.isfile(certLoc)
 
     if(gPath):
         break
