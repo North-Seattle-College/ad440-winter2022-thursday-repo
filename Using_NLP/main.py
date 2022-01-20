@@ -115,8 +115,6 @@ def main():
             type_sentence.append('Interrogative')
         else:
             type_sentence.append('Unknown or Numbers')
-    # if sentences_qnt - len()
-
     for items in first_words:
         if items in wh_question:
             list_of_question_words.append('WH question')
@@ -132,15 +130,20 @@ def main():
 
     countQuestionWords = Counter(list_of_question_words)
     print('Summary of question words: ', countQuestionWords)
-    # cleanup the text and make it as words in a list
+
+# cleanup the text and make it as words in a list
+
     cleanedText = myFile.translate(str.maketrans('', '', string.punctuation))
     tokenizedList = word_tokenize(cleanedText, "english")
 
 # creating a list of stop words in the feedback
+
     listOfWords = [
         item for item in tokenizedList if item in stopwords.words('english')]
     countstopwords = Counter(listOfWords)
+
 # creating a list of words in the feedback excluded all the stop words
+
     finalList = [
         item for item in tokenizedList if item not in stopwords.words('english')]
 
@@ -151,10 +154,14 @@ def main():
         itemsCount += 1
         if item in stopwords.words('english'):
             count += 1
+
 # creating a list of emotion words and the words that have emotion according to our pre defined list
+
     emotionList = []
     wordList = []
+
 # list of words with their emothions
+
     with open('emotions.txt', 'r') as file:
         for line in file:
             clearLine = line.replace('\n', '').replace(
@@ -172,9 +179,12 @@ def main():
     # myFile =Path('/college/Winter2022/Ad450/NLP/test.myFile').read_text().replace('\n','')
 
 # creating a blob text
+
     blob = TextBlob(myFile)
     wordCount = blob.word_counts
+
 # make all the typos correct
+
     # correctmyFile = blob.correct()
     # sentences = blob.sentences
     # sen = blob.sentiment
@@ -200,8 +210,6 @@ def main():
     # regex_tokenize = RegexpTokenizer.tokenize(myFile)
     # print(regex_tokenize)
 
-    # print('\n'+'*** information: polarity -1 to 1 ---> (-1 is very negative, 0 is neutral and 1 is very positive)'+'\n')
-    # print('\n'+'*** information: subjectivity --> (0 is very objective, 1 is very subjective)'+'\n')
     print('\n'+'******************************************************************')
     print('Summary of sentiments:')
     print('\n'+'list of words with emotions: ', wordList)
