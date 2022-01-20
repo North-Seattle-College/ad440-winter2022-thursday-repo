@@ -184,7 +184,8 @@ def main():
 
     def sentimentAnalyse(text):
         score = SentimentIntensityAnalyzer().polarity_scores(text)
-        print(score)
+        for k,v in score.items():
+            print(f"{k}:{v:.2f}")
         neg = score['neg']
         pos = score['pos']
         if neg > pos:
