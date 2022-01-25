@@ -25,14 +25,14 @@ from nltk.tokenize import sent_tokenize
 #    If this is your first time to run this app, uncomment these lines, run the app and comment them up again.
 ######## *****************************************************************************************************
 
-# # downloading required packages
-# nltk.download('nps_chat')
-# nltk.download('punkt')
-# nltk.download('brown')
-# nltk.download('movie_reviews')
-# nltk.download('stopwords')
-# nltk.download('vader_lexicon')
-# nltk.download('tagsets')
+#    downloading required packages
+nltk.download('nps_chat')
+nltk.download('punkt')
+nltk.download('brown')
+nltk.download('movie_reviews')
+nltk.download('stopwords')
+nltk.download('vader_lexicon')
+nltk.download('tagsets')
 
 
 
