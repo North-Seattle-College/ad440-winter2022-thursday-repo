@@ -126,12 +126,12 @@ paths:
           description: "Forbidden"
  
 
-  /Student/{studentID}/comment/:
+  /Student/{studentID}/AIFeedback/:
     post:
       tags:
-      - "Comment"
+      - "AIFeedback"
       summary: "Invalid operation"
-      description: "Comment post not supported"
+      description: "Posting comments not supported, use /Student/{studentID} endpoint"
       consumes: []
       produces: []
       parameters:
@@ -149,9 +149,9 @@ paths:
           description: "Method Not Allowed"   
     get:
       tags:
-      - "Comment"
-      summary: "Returns AI Feedback Coach assistance"
-      description: "Return AI Feedbach Coach assistance based on a new comment for a particular student. Will add comment to student repository, but for adding many comments use /Student/{studentID} for adding commments."
+      - "AIFeedback"
+      summary: "Returns AI Feedback"
+      description: "Return AI Feedbach Coach assistance based on a new comment for a particular student. Will add comment to student repository, but for adding many comments use /Student/{studentID} endpoint."
       operationId: "commentFeedback"
       consumes:
       - "application/json"
@@ -166,7 +166,7 @@ paths:
       - in: "body"
         name: "body"
         description: "Student Feedback"
-        required: false
+        required: true
         schema:
           type: string
       responses:
@@ -184,9 +184,9 @@ paths:
           description: "Internal Server Error"  
     patch:
       tags:
-      - "Comment"
+      - "AIFeedback"
       summary: "Invalid operation"
-      description: "Comment patch not supported"
+      description: "AI Feedback patch not supported"
       consumes: []
       produces: []
       parameters:
@@ -204,9 +204,9 @@ paths:
           description: "Method Not Allowed" 
     delete:
       tags:
-      - "Comment"
+      - "AIFeedback"
       summary: "Invalid operation"
-      description: "Comment delete not supported"
+      description: "AI Feedback delete not supported"
       consumes: []
       produces: []
       parameters:
