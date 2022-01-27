@@ -11,7 +11,7 @@ Create a student record, and optionally add feedback. Can create empty student r
 - 403 Forbidden
 - 500 Internal Server Error
 ### GET 
-Get all student feedback data. Returns JOSN object.
+Get all student feedback data. Returns JSON object.
 - 200 OK.
     - Returns JSON object.
 - 401 Unauthorized 

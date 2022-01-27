@@ -130,8 +130,8 @@ paths:
     post:
       tags:
       - "Comment"
-      summary: "Get comment feedback for student"
-      description: "Get comment feedback for a particular student"
+      summary: "Returns AI Feedback Coach assistance"
+      description: "Return AI Feedbach Coach comment based on a new comment for a particular student. Use /Student/{studentID} for adding commments."
       operationId: "commentFeedback"
       consumes:
       - "application/json"
@@ -166,7 +166,7 @@ paths:
       tags:
       - "Comment"
       summary: "Invalid operation"
-      description: "Comment delete not supported"
+      description: "Comment get not supported"
       consumes: []
       produces: []
       parameters:
@@ -186,7 +186,7 @@ paths:
       tags:
       - "Comment"
       summary: "Invalid operation"
-      description: "Comment delete not supported"
+      description: "Comment patch not supported"
       consumes: []
       produces: []
       parameters:
