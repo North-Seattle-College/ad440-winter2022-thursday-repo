@@ -130,8 +130,28 @@ paths:
     post:
       tags:
       - "Comment"
+      summary: "Invalid operation"
+      description: "Comment post not supported"
+      consumes: []
+      produces: []
+      parameters:
+      - in: path
+        name: studentID
+        type: integer
+        required: true
+        description: "student ID number"
+      responses: 
+        "401":
+          description: "Unauthorized" 
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Method Not Allowed"   
+    get:
+      tags:
+      - "Comment"
       summary: "Returns AI Feedback Coach assistance"
-      description: "Return AI Feedbach Coach comment based on a new comment for a particular student. Use /Student/{studentID} for adding commments."
+      description: "Return AI Feedbach Coach assistance based on a new comment for a particular student. Will add comment to student repository, but for adding many comments use /Student/{studentID} for adding commments."
       operationId: "commentFeedback"
       consumes:
       - "application/json"
@@ -162,26 +182,6 @@ paths:
           description: "Forbidden"
         "500":
           description: "Internal Server Error"  
-    get:
-      tags:
-      - "Comment"
-      summary: "Invalid operation"
-      description: "Comment get not supported"
-      consumes: []
-      produces: []
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      responses: 
-        "401":
-          description: "Unauthorized" 
-        "403":
-          description: "Forbidden"
-        "405":
-          description: "Method Not Allowed"   
     patch:
       tags:
       - "Comment"
