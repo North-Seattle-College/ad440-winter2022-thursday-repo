@@ -33,8 +33,6 @@ nltk.download('stopwords')
 nltk.download('vader_lexicon')
 nltk.download('tagsets')
 
-
-
 print('\n'+'******************************************************************')
 print('This application is about Natural Language Processing (NLP).')
 print('The user enters sentence(s) and by using Natural Language Tool Kit (nltk) and other algorithm the application')
@@ -42,7 +40,6 @@ print('will analyze that entry and gives some feesback.')
 print('\n'+'*****   THIS APPLICATION DOES NOT SUPPORT CONTRACTED FORM    *****'+'\n')
 print("If this is your first time to run this application, please uncomment all the nltk.downloads and then run the app!")
 print('For the test of this app we have two list of comments in this file!')
-
 
 def main():
 
@@ -166,12 +163,6 @@ def main():
     blob = TextBlob(myFile)
     wordCount = blob.word_counts
 
-# make all the typos correct
-
-    # correctmyFile = blob.correct()
-    # sentences = blob.sentences
-    # sen = blob.sentiment
-
     blob = TextBlob(myFile, analyzer=NaiveBayesAnalyzer())
     sen_sub = blob.sentiment
 
@@ -208,47 +199,4 @@ def main():
     plt.savefig('graph.png')
     plt.show()
 
-# here we can get all the tags for each words
-
-    # print(nltk.pos_tag(tokenizedList))
-
-
-
 main()
-
-###### Cheat sheet for tagging #########################################################
-# CC coordinating conjunction
-# CD cardinal digit
-# DT determiner
-# EX existential there (like: “there is” … think of it like “there exists”)
-# FW foreign word
-# IN preposition/subordinating conjunction
-# JJ adjective ‘big’
-# JJR adjective, comparative ‘bigger’
-# JJS adjective, superlative ‘biggest’
-# LS list marker 1)
-# MD modal could, will
-# NN noun, singular ‘desk’
-# NNS noun plural ‘desks’
-# NNP proper noun, singular ‘Harrison’
-# NNPS proper noun, plural ‘Americans’
-# PDT predeterminer ‘all the kids’
-# POS possessive ending parent‘s
-# PRP personal pronoun I, he, she
-# PRP$ possessive pronoun my, his, hers
-# RB adverb very, silently,
-# RBR adverb, comparative better
-# RBS adverb, superlative best
-# RP particle give up
-# TO to go ‘to‘ the store.
-# UH interjection errrrrrrrm
-# VB verb, base form take
-# VBD verb, past tense took
-# VBG verb, gerund/present participle taking
-# VBN verb, past participle taken
-# VBP verb, sing. present, non-3d take
-# VBZ verb, 3rd person sing. present takes
-# WDT wh-determiner which
-# WP wh-pronoun who, what
-# WP$ possessive wh-pronoun whose
-# WRB wh-abverb where, when
