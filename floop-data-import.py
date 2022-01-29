@@ -1,21 +1,23 @@
-from decimal import Decimal
-import json
+
+import json 
 from xml.etree.ElementTree import Comment
-import boto3
+import boto3 
 
 
-def load_conversation(conversation, dynamodb=None):
+def load_conversation(conversations, dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+        dynamodb = boto3.resource('dynamodb')
 
     table = dynamodb.Table('Conversation')
-    for conversation in conversation:
-        id = int(conversation['id'])
-        print("Adding conversation:", id)
-        table.put_item(Item=Comment)
-
+    i=1000
+    # Loop through all the items and load each
+    for conversation in conversations:
+       
+        table.put_item(Item={"comment": conversation, "id": i})
+        i+=1
 
 if __name__ == '__main__':
-    with open("floop-conv-data.json") as json_file:
-        conversation_list = json.load(json_file, parse_float=Decimal)
-    load_conversation(list)
+    # open file and read the data in it
+    with open("floop-conv-data.json",encoding="utf-8") as json_file:
+        conversation_list = json.load(json_file)
+    load_conversation(conversation_list)
