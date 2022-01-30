@@ -49,7 +49,7 @@ def plotData(rawClusterData):
     plt.xticks(locs, orderedList(dn['leaves']))  # Set text labels and properties.
     plt.xlabel('Teacher Comments')
     plt.ylabel('Distance Level')
-    plt.title("Hierarchy Cluster Plot")
+    plt.title("Hierarchical Cluster Plot")
     plt.show()
 
 # main fucntion of script
