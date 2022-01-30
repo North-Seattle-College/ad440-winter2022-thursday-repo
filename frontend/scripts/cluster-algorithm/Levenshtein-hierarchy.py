@@ -7,16 +7,10 @@ import matplotlib.pyplot as plt
 import json
 with open('test-teacher-comments.json', 'r') as f:
     masterList = json.load(f)
-COUNT = 0
 # USING TEST JSON FILE
-
 
 # Returns the distance between words i and j using the Levenshtein distance formula
 def distance(coord):
-    global COUNT # TESTING ONLY
-    COUNT += 1 # TESTING ONLY
-    print(COUNT) # TESTING ONLY (Total number should reach "31125")
-
     i, j = coord
     return Levenshtein.distance(masterList[i], masterList[j])
 
@@ -45,7 +39,7 @@ def cluster(StringList):
 def orderedList(order):
     newList = []
     for s in order:
-        newList.append(masterList[s].replace('$','')) # $$ crashes matplotlib
+        newList.append(masterList[s].replace('$','')) # String that end wiht "$" crash matplotlib
     return newList
 
 # Plot and graph the cluster data into a visual representation  
