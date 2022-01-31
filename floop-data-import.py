@@ -1,6 +1,6 @@
 
 import json 
-from xml.etree.ElementTree import Comment
+#from xml.etree.ElementTree import Comment
 import boto3 
 
 
@@ -9,11 +9,11 @@ def load_conversation(conversations, dynamodb=None):
         dynamodb = boto3.resource('dynamodb')
 
     table = dynamodb.Table('Conversation')
-    i=1000
+    i=2000000
     # Loop through all the items and load each
     for conversation in conversations:
        
-        table.put_item(Item={"comment": conversation, "id": i})
+        table.put_item(Item={"comment": conversation, "Id": i})
         i+=1
 
 if __name__ == '__main__':
