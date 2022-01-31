@@ -1,39 +1,34 @@
 swagger: "2.0"
 info:
-  description: "This is the API for AI Feedback Coach - AD440 Winter 2022"
+  description: "This is the API for AI feedback Coach - AD440 Winter 2022"
   version: "1.0"
-  title: "AI Feedback Coach API"
+  title: "AI feedback Coach API"
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: "ericknigge@gmail.com"
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "api.tasks.testsite01.com"
+host: "unknown"
 basePath: "/"
 paths:
 
-  /Student/{studentID}/:
+  /feedback:
     post:
       tags:
-      - "Student"
-      summary: "Create student and track feedback"
-      description: "Create student record and add teacher feedback for student"
-      operationId: "addStudentFeedback"
+      - "feedback"
+      summary: "Add feedback to Database"
+      description: "Add feedback to database"
+      operationId: "addfeedback"
       consumes:
       - "application/json"
       produces:
       - "integer"
       parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
       - in: "body"
         name: "body"
-        description: "Student Feedback"
-        required: false
+        description: "Student feedback"
+        required: true
         schema:
           $ref: "#/definitions/Student"
       responses:
@@ -49,25 +44,26 @@ paths:
           description: "Internal Server Error"
     get:
       tags:
-      - "Student"
-      summary: "Get student feedback"
+      - "feedback"
+      summary: "Get AI feedback"
       description: "Get all student feedback data"
-      operationId: "getStudentFeedback"
+      operationId: "getFeedback"
       produces: 
       - "application/json"
-      parameters: 
-      - in: path
-        name: studentID
-        type: integer
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Student feedback"
         required: true
-        description: "student ID number"
+        schema:
+          type: "string"
       responses: 
         "200":
           description: "OK"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Student"
+            type: "string"
+        "400":
+          description: "Bad Reqest"
         "401":
           description: "Unauthorized" 
         "403":
@@ -76,154 +72,30 @@ paths:
           description: "Internal Server Error"
     patch:
       tags:
-      - "Student"
-      summary: "Add additional feedback"
-      description: "Add additioinal feedback for existing student"
-      operationId: "updateStudent"      
-      consumes:
-      - "application/json"
-      produces:
-      - "integer"
-      parameters: 
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      - in: "body"
-        name: "body"
-        description: "Student Feedback"
-        required: true
-        schema:
-          $ref: "#/definitions/Student"        
-      responses: 
-        "200":
-          description: "OK"      
+      - "feedback"
+      summary: "Invalid Operation"
+      description: "Invalid Operation, cannot update feedback"
+      responses:
         "401":
           description: "Unauthorized" 
         "403":
           description: "Forbidden"
         "405":
-          description: "Method Not Allowed"
+          description: "Method Not Allowed" 
     delete:
       tags:
-      - "Student"
-      summary: "Remove Student & Feedback"
-      description: "Delete student, and all comments for student"
+      - "feedback"
+      summary: "Invalid Operation"
+      description: "Invalid Operation, cannot delete feedback"
       operationId: "removeStudent"      
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
       responses:
-        "200":
-          description: "OK"        
-        "401":
-          description: "Unauthorized" 
-        "403":
-          description: "Forbidden"
- 
-
-  /Student/{studentID}/AIFeedback/:
-    post:
-      tags:
-      - "AIFeedback"
-      summary: "Invalid operation"
-      description: "Posting comments not supported, use /Student/{studentID} endpoint"
-      consumes: []
-      produces: []
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      responses: 
-        "401":
-          description: "Unauthorized" 
-        "403":
-          description: "Forbidden"
-        "405":
-          description: "Method Not Allowed"   
-    get:
-      tags:
-      - "AIFeedback"
-      summary: "Returns AI Feedback"
-      description: "Return AI Feedbach Coach assistance based on a new comment for a particular student. Will add comment to student repository, but for adding many comments use /Student/{studentID} endpoint."
-      operationId: "commentFeedback"
-      consumes:
-      - "application/json"
-      produces:
-      - "string"
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      - in: "body"
-        name: "body"
-        description: "Student Feedback"
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: "OK"
-          schema:
-            type: string
-        "400":
-          description: "Bad Request"     
-        "401":
-          description: "Unauthorized" 
-        "403":
-          description: "Forbidden"
-        "500":
-          description: "Internal Server Error"  
-    patch:
-      tags:
-      - "AIFeedback"
-      summary: "Invalid operation"
-      description: "AI Feedback patch not supported"
-      consumes: []
-      produces: []
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      responses: 
         "401":
           description: "Unauthorized" 
         "403":
           description: "Forbidden"
         "405":
           description: "Method Not Allowed" 
-    delete:
-      tags:
-      - "AIFeedback"
-      summary: "Invalid operation"
-      description: "AI Feedback delete not supported"
-      consumes: []
-      produces: []
-      parameters:
-      - in: path
-        name: studentID
-        type: integer
-        required: true
-        description: "student ID number"
-      responses: 
-        "401":
-          description: "Unauthorized" 
-        "403":
-          description: "Forbidden"
-        "405":
-          description: "Method Not Allowed" 
- 
-  
+          
 definitions:
   Student:
     type: "object"
@@ -231,8 +103,3 @@ definitions:
       comments:
         type: "array"
         items: {type: "string"}
- 
-  
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
