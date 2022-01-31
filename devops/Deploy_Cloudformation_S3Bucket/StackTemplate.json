@@ -1,7 +1,7 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Resources": {
-        "S3Bucket": {
+        "ReactAppS3Bucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
                 "AccessControl": "PublicRead",
@@ -9,8 +9,8 @@
                     "IndexDocument": "index.html",
                     "ErrorDocument": "error.html"
                 }
-            },
-            "DeletionPolicy": "Retain"
+            }
+
         },
         "BucketPolicy": {
             "Type": "AWS::S3::BucketPolicy",
@@ -29,9 +29,9 @@
                                     "",
                                     [
                                         "arn:aws:s3:::",
-                                        {
-                                            "Ref": "S3Bucket"
-                                        },
+                                      {
+                                        "Ref": "ReactAppS3Bucket"
+                                      },
                                         "/*"
                                     ]
                                 ]
@@ -39,19 +39,19 @@
                         }
                     ]
                 },
-                "Bucket": {
-                    "Ref": "S3Bucket"
-                }
+              "Bucket": {
+                "Ref": "ReactAppS3Bucket"
+              }
             }
         }
     },
     "Outputs": {
         "WebsiteURL": {
             "Value": {
-                "Fn::GetAtt": [
-                    "S3Bucket",
-                    "WebsiteURL"
-                ]
+              "Fn::GetAtt": [
+                "ReactAppS3Bucket",
+                "WebsiteURL"
+              ]
             },
             "Description": "URL for website hosted on S3"
         },
@@ -62,10 +62,10 @@
                     [
                         "https://",
                         {
-                            "Fn::GetAtt": [
-                                "S3Bucket",
-                                "DomainName"
-                            ]
+                          "Fn::GetAtt": [
+                            "ReactAppS3Bucket",
+                            "DomainName"
+                          ]
                         }
                     ]
                 ]
