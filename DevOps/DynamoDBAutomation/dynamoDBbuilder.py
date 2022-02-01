@@ -1,4 +1,4 @@
-# reads the template.json file and creates a stack
+# reads the createDynamoDB.json file and creates a stack
 import json
 import boto3
 
@@ -45,5 +45,5 @@ def create_dynamodb_table(tableName, keyName, cfTemplate):
 # test the function
 # if __name__ == '__main__':
 #     table_status = create_dynamodb_table(
-#         'testDynamoDbTable4', 'id', './devops/DynamoDBAutomation/createDynamoDB.json')
+#         'testDynamoDbTable5', 'id', './devops/DynamoDBAutomation/createDynamoDB.json')
 #     print(table_status)
