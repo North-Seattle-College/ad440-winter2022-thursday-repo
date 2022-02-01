@@ -40,10 +40,3 @@ def create_dynamodb_table(tableName, keyName, cfTemplate):
 
 # return the table status
     return table_status
-
-
-# test the function
-# if __name__ == '__main__':
-#     table_status = create_dynamodb_table(
-#         'testDynamoDbTable5', 'id', './devops/DynamoDBAutomation/createDynamoDB.json')
-#     print(table_status)
