@@ -1,0 +1,51 @@
+{
+  "Description": "Floop BasicNotebookInstance",
+  "Resources": {
+      "BasicNotebookInstance": {
+          "Type": "AWS::SageMaker::NotebookInstance",
+          "Properties": {
+              "InstanceType": "ml.t2.large",
+              "RoleArn": {
+                  "Fn::GetAtt": [
+                      "ExecutionRole",
+                      "Arn"
+                  ]
+              }
+          }
+      },
+      "ExecutionRole": {
+          "Type": "AWS::IAM::Role",
+          "Properties": {
+              "AssumeRolePolicyDocument": {
+                  "Version": "2012-10-17",
+                  "Statement": [
+                      {
+                          "Effect": "Allow",
+                          "Principal": {
+                              "Service": [
+                                  "sagemaker.amazonaws.com"
+                              ]
+                          },
+                          "Action": [
+                              "sts:AssumeRole"
+                          ]
+                      }
+                  ]
+              },
+              "Path": "/",
+              "ManagedPolicyArns": [
+                  {
+                      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/AmazonSageMakerFullAccess"
+                  }
+              ]
+          }
+      }
+  },
+  "Outputs": {
+      "BasicNotebookInstanceId": {
+          "Value": {
+              "Ref": "BasicNotebookInstance"
+          }
+      }
+  }
+}
