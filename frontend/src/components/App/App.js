@@ -4,12 +4,14 @@ import ErrorBox from "../ErrorBox/ErrorBox";
 import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
+import React, { useState } from "react";
 
 function App() {
+  const [feedback, setFeedback] = useState('');
   return (
     <div className="App">
-      <InputBox />
-      <SubmitBtn />
+      <InputBox feedback={feedback} setFeedback={setFeedback}/>
+      <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
       <ClearBtn />
       <FeedbackBox />
       <ErrorBox />
