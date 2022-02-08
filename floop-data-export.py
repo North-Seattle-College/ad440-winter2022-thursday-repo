@@ -1,31 +1,49 @@
+import sys
+import boto3
+import argparse
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import json
 import os
 
+# Initial test of Argparse and adding command line arguments
+parser = argparse.ArgumentParser(description='Using the data-export script.')
+parser.add_argument("fp", type=str,
+                    help="1st arg: This is the credentials filepath variable")
+parser.add_argument("db", choices=["Dev", "Prod"],
+                    type=str, help="2nd arg: Floop db to export from ('Dev'|'Prod')")
+
+args = parser.parse_args()
+fp = args.fp
+dbase = args.db
+print('filepath: ' + fp + '\ndatabase: ' + dbase)
+
 # Get path of firebase cert from user. Prompt user if path doesnt exist
-while True:
+""" while True:
     certLoc = input('Enter full path of Floop Firebase cert file: ')
     gPath = os.path.isfile(certLoc)
 
     if(gPath):
         break
     else:
-        print('File not found, please re-enter file path')
+        print('File not found, please re-enter file path') """
 
 # Use cert file to initialize app access and
 #   connect to Dev_Database Conversations collection
-cred = credentials.Certificate(certLoc)
+cred = credentials.Certificate(fp)
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+collection = 'Databases/{dbase}_Database/Conversations'
+conditionals = ['What is your goal for this year?',
+                'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']
+
 # pull conversation documents where 'Comment_Preview' field isn't certain
 #   text, and pulling a limit of 10k.
-conversations = db.collection(
-    'Databases/Dev_Database/Conversations').where('Comment_Preview', 'not-in', [
-        'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(10000).get()
+conversations = db.collection(collection).where(
+    'Comment_Preview', 'not-in', conditionals).limit(10).get()
 
 if __name__ == '__main__':
 
@@ -50,5 +68,5 @@ if __name__ == '__main__':
     new_arr = list(arr)
 
 # Write contents of list to json file
-    with open('floop-conv-data.json', 'w') as f:
+    with open('floop-conv-data-TEST.json', 'w') as f:
         json.dump(new_arr, f)
