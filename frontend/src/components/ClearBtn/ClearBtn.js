@@ -1,5 +1,6 @@
-export default function ClearBtn() {
-    return (
-        <div>ClearBtn</div>
-    );
+import './ClearBtn.css';
+export default function ClearBtn({setFeedback}) {
+  return (
+      <button onClick={() => setFeedback(() => "")}>Cancel</button>
+  );
 }
