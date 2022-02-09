@@ -67,6 +67,18 @@ if __name__ == '__main__':
     arr = set(cList)
     new_arr = list(arr)
 
+
 # Write contents of list to json file
-    with open('floop-conv-data-TEST.json', 'w') as f:
-        json.dump(new_arr, f)
+"""     with open('floop-conv-data-TEST.json', 'w') as f:
+        json.dump(new_arr, f) """
+
+s3 = boto3.client('s3')
+# s3 = boto3.resource('s3')
+filename = "upload-test.json"
+with open(filename, "w") as f:
+    # json.dump(new_arr, f)
+    # json.dump(new_arr, f)
+    s3.upload_file(filename,
+                   'ad440-mpg-floop-export-storage', filename)
+    #s3.Object('ad440-mpg-floop-export-storage', f).put()
+# s3.upload_file(f, "")
