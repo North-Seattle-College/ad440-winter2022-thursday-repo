@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <InputBox feedback={feedback} setFeedback={setFeedback}/>
       <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
-      <ClearBtn />
+      <ClearBtn setFeedback={setFeedback}/>
       <FeedbackBox />
       <ErrorBox />
     </div>
