@@ -19,15 +19,15 @@ fp = args.fp
 dbase = args.db
 print('filepath: ' + fp + '\ndatabase: ' + dbase)
 
-# Get path of firebase cert from user. Prompt user if path doesnt exist
-""" while True:
-    certLoc = input('Enter full path of Floop Firebase cert file: ')
-    gPath = os.path.isfile(certLoc)
+gPath = os.path.isfile(fp)
 
-    if(gPath):
-        break
-    else:
-        print('File not found, please re-enter file path') """
+# Get path of firebase cert from user. Prompt user if path doesnt exist
+# while True:
+    # certLoc = input('Enter full path of Floop Firebase cert file: ')
+    # gPath = os.path.isfile(fp)
+
+if not gPath:
+    print('File not found, check Floop credentials file path and try again.')
 
 # Use cert file to initialize app access and
 #   connect to Dev_Database Conversations collection
@@ -36,10 +36,10 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-collection = 'Databases/{dbase}_Database/Conversations'
+collection = 'Databases/{}_Database/Conversations'.format(dbase)
 conditionals = ['What is your goal for this year?',
                 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']
-
+print('collection: '+ collection)
 # pull conversation documents where 'Comment_Preview' field isn't certain
 #   text, and pulling a limit of 10k.
 conversations = db.collection(collection).where(
@@ -67,18 +67,21 @@ if __name__ == '__main__':
     arr = set(cList)
     new_arr = list(arr)
 
-
+print(new_arr)
 # Write contents of list to json file
-"""     with open('floop-conv-data-TEST.json', 'w') as f:
-        json.dump(new_arr, f) """
 
-s3 = boto3.client('s3')
-# s3 = boto3.resource('s3')
-filename = "upload-test.json"
+""" s3 = boto3.client('s3')
+filename = "upload-test-boto3client.json"
 with open(filename, "w") as f:
-    # json.dump(new_arr, f)
-    # json.dump(new_arr, f)
+    json.dump(new_arr, f)
     s3.upload_file(filename,
-                   'ad440-mpg-floop-export-storage', filename)
-    #s3.Object('ad440-mpg-floop-export-storage', f).put()
-# s3.upload_file(f, "")
+        'ad440-mpg-floop-export-storage', filename)
+ """
+
+
+s3 = boto3.resource('s3')
+s3object = s3.Object('ad440-mpg-floop-export-storage', 'auto-export-test.json')
+
+s3object.put(
+    Body=(bytes(json.dumps(new_arr).encode('UTF-8'))), ContentType='application/json'
+)
