@@ -40,3 +40,15 @@ def create_dynamodb_table(tableName, keyName, cfTemplate):
 
 # return the table status
     return table_status
+
+
+# accept the table name and key name from the user
+tableName = input("Enter the table name: ")
+keyName = input("Enter the key name: ")
+
+
+# deploy the template and print the table status
+if __name__ == '__main__':
+    table_status = create_dynamodb_table(
+        tableName, keyName, 'createDynamoDB.json')
+    print(table_status)
