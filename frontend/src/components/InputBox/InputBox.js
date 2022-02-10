@@ -8,7 +8,7 @@ export default function InputBox({ feedback, setFeedback }) {
       </div>
 
       <div className="third">
-        As you write down messages to give feedback to students, You will
+        As you write down messages to give feedback to students, you will
         receive relevant coaching messages according to your feedback to improve
         it.
       </div>
