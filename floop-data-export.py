@@ -39,7 +39,7 @@ else:
 # Pull conversation documents where 'Comment_Preview' field isn't certain
 #   text, and pulling a limit of 10k.
     conversations = db.collection(collection).where(
-        'Comment_Preview', 'not-in', conditionals).limit(10).get()
+        'Comment_Preview', 'not-in', conditionals).limit(1000).get()
 
 if __name__ == '__main__':
 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
 # Initiate s3 connection to desired bucket and default object filename.
     s3 = boto3.resource('s3')
-    s3object = s3.Object('ad440-mpg-floop-export-storage', 'auto-export-test.json')
+    s3object = s3.Object('ad440-mpg-floop-export-storage', 'auto-floop-s3-export.json')
 
 # Put json of list into object and put into s3 bucket.
     s3object.put(
