@@ -54,3 +54,5 @@ while :
     printf '%s\n' "Done" 
     break
   done 
+
+#fake commit test to take care of issue#40

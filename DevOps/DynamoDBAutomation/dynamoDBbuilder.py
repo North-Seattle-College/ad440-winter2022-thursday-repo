@@ -40,3 +40,5 @@ def create_dynamodb_table(tableName, keyName, cfTemplate):
 
 # return the table status
     return table_status
+
+# fake commit test to take care of issue#40
