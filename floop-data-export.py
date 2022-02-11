@@ -9,6 +9,8 @@ while True:
     certLoc = input('Enter full path of Floop Firebase cert file: ')
     gPath = os.path.isfile(certLoc)
 
+    n = int(input('Enter the number of conversations required: '))
+
     if(gPath):
         break
     else:
@@ -38,7 +40,7 @@ if __name__ == '__main__':
 
     for convo in conversations:
         convo_entries = convo.reference.collection(
-            'Messages').order_by(u'Date_Submitted').limit(1).get()
+            'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
             cList.append(entry.get("Text").strip())
@@ -48,7 +50,8 @@ if __name__ == '__main__':
 # Convert back to list so json.dump can process it
     arr = set(cList)
     new_arr = list(arr)
-
+# Create new variable to store first "N" conversations
+    new_arr_n = new_arr[:n]
 # Write contents of list to json file
-    with open('floop-conv-data.json', 'w') as f:
-        json.dump(new_arr, f)
+    with open('floop-conv-data_N.json', 'w') as f:
+        json.dump(new_arr_n, f)
