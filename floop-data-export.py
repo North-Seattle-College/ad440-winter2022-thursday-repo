@@ -27,7 +27,7 @@ db = firestore.client()
 #   text, and pulling a limit of 10k.
 conversations = db.collection(
     'Databases/Dev_Database/Conversations').where('Comment_Preview', 'not-in', [
-        'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(10000).get()
+        'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(n).get()
 
 if __name__ == '__main__':
 
@@ -39,10 +39,13 @@ if __name__ == '__main__':
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
+        # save Participant_IDs for 'T' & 'S' for each convo
+        # don't think order_by is needed now, as we'll be grabbing all the messages
         convo_entries = convo.reference.collection(
             'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
+            # append a pairing of Sender_ID and Text fields, where Sender_ID maches saved Participant_IDs from the convo_entries 
             cList.append(entry.get("Text").strip())
 
 # Convert cList to a Set to remove duplicate values
