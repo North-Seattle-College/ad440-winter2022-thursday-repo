@@ -11,7 +11,10 @@ function App() {
   return (
     <div className="App">
       <InputBox feedback={feedback} setFeedback={setFeedback}/>
-      <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
+
+      {/* Task for Payam Taherirostami: */}
+      <SubmitBtn feedback={feedback} setFeedback={setFeedback} /> 
+       
       <ClearBtn setFeedback={setFeedback}/>
       <FeedbackBox />
       <ErrorBox />
