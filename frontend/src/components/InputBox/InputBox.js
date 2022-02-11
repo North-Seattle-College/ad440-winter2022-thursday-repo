@@ -7,7 +7,7 @@ export default function InputBox({ feedback, setFeedback }) {
         <h1>Feedback</h1>
       </div>
 
-      <div className="third">
+      <div className="description">
         As you write down messages to give feedback to students, you will
         receive relevant coaching messages according to your feedback to improve
         it.
@@ -16,6 +16,7 @@ export default function InputBox({ feedback, setFeedback }) {
       <input
         type="text"
         className="feedback-input"
+        placeholder="Your feedback goes here"
         value={feedback}
         onChange={e => setFeedback(e.target.value)}
       />

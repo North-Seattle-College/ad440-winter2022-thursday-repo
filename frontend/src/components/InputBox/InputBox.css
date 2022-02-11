@@ -8,11 +8,6 @@
   outline-color: #58a697;
 }
 
-/* Resize input size to be larger than what it is supposed to be at when clicking it */
-.feedback-input:focus {
-  min-width: 50%;
-}
-
 h1 {
   margin-right: 90%;
 }
@@ -21,7 +16,7 @@ h2 {
   margin-right: 15%;
 }
 
-.third {
+.description {
   width: 45%;
   height: 100px;
   padding: 10px;
