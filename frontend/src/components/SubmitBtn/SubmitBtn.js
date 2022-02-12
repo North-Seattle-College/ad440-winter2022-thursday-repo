@@ -15,7 +15,13 @@ export default function SubmitBtn({feedback , setFeedback}) {
     return (
         <div>
              <button onClick={handleSubmit}>Submit</button>
-             <div>{ showAnalysis ? feedback : null }</div>
+             <div>{ showAnalysis ? <Results />  : null }</div>
         </div>
     );
 }
+
+const Results = () => (
+    <div>
+      AI Response..
+    </div>
+  )
