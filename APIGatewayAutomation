@@ -1,0 +1,89 @@
+Microsoft Windows [Version 10.0.19042.1466]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\jcdam>aws --version
+aws-cli/2.4.18 Python/3.8.8 Windows/10 exe/AMD64 prompt/off
+
+C:\Users\jcdam>aws apigateway create-rest-api --name APIAuth2 --description "Sprint 2 Issue 49 Create automation to create API Gateway resource in AWS"
+
+You must specify a region. You can also configure your region by running "aws configure".
+
+C:\Users\jcdam>aws configure
+AWS Access Key ID [None]:
+AWS Secret Access Key [None]:
+Default region name [None]:
+Default output format [None]:
+
+C:\Users\jcdam>aws apigateway create-rest-api --name APIAuth2 --description "Sprint 2 Issue 49 Create automation to create API Gateway resource in AWS"
+
+You must specify a region. You can also configure your region by running "aws configure".
+
+C:\Users\jcdam>aws configure
+AWS Access Key ID [None]: AKIAQ4TMT5RKL3WTF6DR
+AWS Secret Access Key [None]: 10HpXQTu2BkkUANgS7cK5iQmOTwJKDT4UPi0Djnf
+Default region name [None]: us-west-2
+Default output format [None]:
+
+C:\Users\jcdam>aws apigateway create-rest-api --name APIAuth2 --description "Sprint 2 Issue 49 Create automation to create API Gateway resource in AWS"
+{
+    "id": "bk9lq2qoth",
+    "name": "APIAuth2",
+    "description": "Sprint 2 Issue 49 Create automation to create API Gateway resource in AWS",
+    "createdDate": "2022-02-11T11:53:19-08:00",
+    "apiKeySource": "HEADER",
+    "endpointConfiguration": {
+        "types": [
+            "EDGE"
+        ]
+    },
+    "disableExecuteApiEndpoint": false
+}
+
+
+C:\Users\jcdam>aws apigateway get-resources --rest-api-id "bk9lq2qoth"
+{
+    "items": [
+        {
+            "id": "8dw9scifph",
+            "path": "/"
+        }
+    ]
+}
+
+
+C:\Users\jcdam>aws apigateway create-resource --rest-api-id "bk9lq2qoth" --parent-id  "8dw9scifph" --path-part "new"
+{
+    "id": "w9ry7b",
+    "parentId": "8dw9scifph",
+    "pathPart": "new",
+    "path": "/new"
+}
+
+
+C:\Users\jcdam>aws apigateway put-method --rest-api-id "bk9lq2qoth" --resource-id "w9ry7b" --http-method "GET" --authorization-type "NONE"
+{
+    "httpMethod": "GET",
+    "authorizationType": "NONE",
+    "apiKeyRequired": false
+}
+
+
+
+C:\Users\jcdam>aws apigateway put-integration --rest-api-id "bk9lq2qoth" --resource-id "w9ry7b" --http-method "GET" --type "MOCK"
+{
+    "type": "MOCK",
+    "passthroughBehavior": "WHEN_NO_MATCH",
+    "timeoutInMillis": 29000,
+    "cacheNamespace": "w9ry7b",
+    "cacheKeyParameters": []
+}
+
+
+C:\Users\jcdam>aws apigateway create-deployment --rest-api-id "bk9lq2qoth" --stage-name "dev"
+{
+    "id": "ahg98i",
+    "createdDate": "2022-02-11T13:12:24-08:00"
+}
+
+
+C:\Users\jcdam>
