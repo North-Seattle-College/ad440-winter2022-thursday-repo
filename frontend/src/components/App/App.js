@@ -7,16 +7,16 @@ import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
 
 function App() {
-  const [feedback, setFeedback] = useState('');
+  const [feedback, setFeedback, showAnalysis, setShowAnalysis] = useState('');
   return (
     <div className="App">
       <InputBox feedback={feedback} setFeedback={setFeedback}/>
 
       {/* Task for Payam Taherirostami: */}
-      <SubmitBtn feedback={feedback} setFeedback={setFeedback} /> 
+      <SubmitBtn feedback={feedback} setFeedback={setFeedback} showAnalysis={showAnalysis} setShowAnalysiss={setShowAnalysis}/> 
        
       <ClearBtn setFeedback={setFeedback}/>
-      <FeedbackBox />
+      <FeedbackBox feedback={feedback} showAnalysis={showAnalysis}/>
       <ErrorBox />
     </div>
   );
