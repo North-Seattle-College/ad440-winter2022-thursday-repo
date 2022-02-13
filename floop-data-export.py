@@ -71,3 +71,4 @@ if __name__ == '__main__':
     s3object.put(
         Body=(bytes(json.dumps(new_arr).encode('UTF-8'))), ContentType='application/json'
     )
+    
