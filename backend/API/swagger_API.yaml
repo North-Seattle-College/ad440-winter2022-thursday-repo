@@ -27,22 +27,12 @@ paths:
         description: "feedback"
         required: true
         schema:
-          type: "string"
+          $ref: "#/definitions/Feedback"
       responses:
         "200":
           description: "OK"
           schema:
-            type: "object"
-            properties:
-              positiveRating:
-                type: "number"
-                format: "float"
-              negativeRating:
-                type: "number"
-                format: "float" 
-              neutralRating:
-                type: "number"
-                format: "float"                   
+            $ref: "#/definitions/AIFeedback"                   
         "400":
           description: "Bad Request"     
         "401":
@@ -87,3 +77,23 @@ paths:
           description: "Forbidden"
         "405":
           description: "Method Not Allowed" 
+          
+definitions:
+  Feedback:
+    type: "object"
+    properties:
+      feedback:
+        type: "string"
+
+  AIFeedback:
+    type: "object"
+    properties:
+      positiveRating:
+        type: "number"
+        format: "float"
+      negativeRating:
+        type: "number"
+        format: "float" 
+      neutralRating:
+        type: "number"
+        format: "float"
