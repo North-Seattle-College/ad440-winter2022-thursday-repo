@@ -10,15 +10,13 @@ function App() {
   const [feedback, setFeedback] = useState('');
   return (
     <div className="App">
-      <div className="userInput">
-        <InputBox feedback={feedback} setFeedback={setFeedback} />
-        <div className="userBtns">
-          <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
-          <ClearBtn setFeedback={setFeedback} />
-        </div>
+      <InputBox feedback={feedback} setFeedback={setFeedback} />
+      <div className="userBtns">
+        <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
+        <ClearBtn setFeedback={setFeedback} />
       </div>
       <FeedbackBox />
-      <ErrorBox />
+      {/* <ErrorBox /> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 export default function ErrorBox() {
     return (
-        <div></div>
+        <div>ErrorBox</div>
     );
 }

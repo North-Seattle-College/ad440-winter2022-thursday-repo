@@ -5,9 +5,48 @@
 .userBtns {
   justify-content: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
-.userInput {
+.user-input {
+  border: solid 2px #00807F;
+  background-color: #eeecec;
+  padding: 12px;
+  width: 30%;
+}
+
+.page-header {
+  width: 30%;
+  margin: 0px auto;
+  background-color: #ccc;
+  font: 1.4em cursive;
+  border-radius: 20px;
+  border: 3px solid #00807F;
+}
+
+.analysis {
+  margin-left: -140px;
+}
+
+.feedbackbox {
+  display: flex;
   justify-content: center;
+}
+
+.feedback {
+  border: solid 2px black;
+  padding: 12px;
+  width: 30%;
+  text-align: left;
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #00807F;
+  border-color: white;
+  color: white;
+  font-size: 20px;
+  font-style: bold;
 }
