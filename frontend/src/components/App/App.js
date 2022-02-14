@@ -1,6 +1,5 @@
 import "./App.css";
 import InputBox from "../InputBox/InputBox";
-import ErrorBox from "../ErrorBox/ErrorBox";
 import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
@@ -16,7 +15,6 @@ function App() {
         <ClearBtn setFeedback={setFeedback} />
       </div>
       <FeedbackBox />
-      {/* <ErrorBox /> */}
     </div>
   );
 }
