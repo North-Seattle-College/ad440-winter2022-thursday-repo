@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+
+.userBtns {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.userInput {
+  justify-content: center;
+}

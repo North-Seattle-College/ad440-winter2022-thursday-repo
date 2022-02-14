@@ -1,11 +1,9 @@
 .feedback-input {
-  border: solid 2px skyblue;
+  border: solid 2px #00807F;
   background-color: #eeecec;
   padding: 12px;
   margin-bottom: 5px;
   width: 30%;
-  height: 20px;
-  outline-color: #58a697;
 }
 
 /* Resize input size to be larger than what it is supposed to be at when clicking it */
