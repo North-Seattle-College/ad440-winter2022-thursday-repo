@@ -3,11 +3,11 @@
 import React from "react";
 import './SubmitBtn.css';
 
-export default function SubmitBtn({feedback , setFeedback}) {
+
+export default function SubmitBtn({feedback , setFeedback ,setShow}) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`You entered: ${feedback}`)
-        setFeedback('')
+        setShow(true);
     }
     return (
         <div>
