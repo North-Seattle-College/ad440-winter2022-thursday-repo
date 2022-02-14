@@ -50,7 +50,8 @@ if __name__ == "__main__":
     try:
         table_status = create_dynamodb_table(
             args.tableName, args.keyName, 'dynamoDBStackTemplate.json')
-        print("Table {} created successfully".format(args.tableName))
+        print("Table {} Table created successfully".format(args.tableName))
     except Exception as e:
-        print("Table {} already exists".format(args.tableName))
+        print("Table {} Table name already exists, please choose a different name".format(
+            args.tableName))
         sys.exit(1)
