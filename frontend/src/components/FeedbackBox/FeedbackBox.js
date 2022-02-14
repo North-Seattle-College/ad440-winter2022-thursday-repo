@@ -1,7 +1,5 @@
-{/* Task for David Nguyen */} 
-
 import "./Feedback.css"
-
+{/* Task for David Nguyen */} 
 export default function FeedbackBox({feedback}) {
     return (
     <div>
