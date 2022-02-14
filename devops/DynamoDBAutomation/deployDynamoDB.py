@@ -37,7 +37,7 @@ def create_dynamodb_table(tableName, keyName, cfTemplate):
     stack = cfnclient.describe_stacks(StackName=tableName)
 
 
-# update to script to run python dynamoDBbuilder.py --tableName sometableName --keyName keySchemaName
+# make the script runnable through command line arguments
 if __name__ == "__main__":
     import argparse
     import sys
