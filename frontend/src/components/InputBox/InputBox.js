@@ -1,6 +1,6 @@
 import "./InputBox.css";
 
-export default function InputBox({ feedback, setFeedback }) {
+export default function InputBox({ feedback, setFeedback, setShow }) {
   return (
     <div>
       <div>
@@ -19,6 +19,7 @@ export default function InputBox({ feedback, setFeedback }) {
         placeholder="Your comment goes here..."
         value={feedback}
         onChange={e => setFeedback(e.target.value)}
+        onFocus= { () =>setShow(false)}
       />
     </div>
   );

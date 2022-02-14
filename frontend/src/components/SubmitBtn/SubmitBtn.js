@@ -4,24 +4,14 @@ import React from "react";
 import './SubmitBtn.css';
 
 
-export default function SubmitBtn({feedback , setFeedback}) {
-    const [showAnalysis, setShowAnalysis] = React.useState(false)
+export default function SubmitBtn({feedback , setFeedback ,setShow}) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // setFeedback('')
-        setShowAnalysis(true)
-        showAnalysis(true)
+        setShow(true);
     }
     return (
         <div>
              <button onClick={handleSubmit}>Submit</button>
-             <div>{ showAnalysis ? <Results />  : null }</div>
         </div>
     );
 }
-
-const Results = () => (
-    <div>
-      AI Response..
-    </div>
-  )

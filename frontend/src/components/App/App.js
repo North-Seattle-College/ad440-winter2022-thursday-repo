@@ -7,17 +7,18 @@ import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
 
 function App() {
-  const [feedback, setFeedback, showAnalysis, setShowAnalysis] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [show, setShow] = useState(false);
   return (
     <div className="App">
-      <InputBox feedback={feedback} setFeedback={setFeedback}/>
+      <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow}/>
 
       {/* Task for Payam Taherirostami: */}
-      <SubmitBtn feedback={feedback} setFeedback={setFeedback} showAnalysis={showAnalysis} setShowAnalysiss={setShowAnalysis}/> 
+      <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow}/> 
        
-      <ClearBtn setFeedback={setFeedback}/>
-      <FeedbackBox feedback={feedback} showAnalysis={showAnalysis}/>
-      <ErrorBox />
+      <ClearBtn setFeedback={setFeedback} setShow={setShow}/>
+      {show && <FeedbackBox feedback={feedback} show={show} />}
+      {/* <ErrorBox /> */}
     </div>
   );
 }
