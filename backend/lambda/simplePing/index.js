@@ -6,7 +6,6 @@ exports.handler = async (event, context) => {
     let body;
     let statusCode=200;
     console.log(event)
-    
     const headers = {
         "Content-Type": "application/json"
     };
@@ -28,12 +27,12 @@ exports.handler = async (event, context) => {
             break;
             case "POST /test":
                 let requestJSON = JSON.parse(event.body);
-                statusCode = 404;
-                body = (`"${event.routeKey}" route. Request received- no db connection`)
+                body = (`POST request success `)
             break;
-            
-            default:
-                throw new Error(`Unsupported route: "${event.routeKey}"`)
+            case "OPTIONS /test":
+                body = (`successfully hit options`)
+                break;
+        
         }
     } catch (err) {
         statusCode = 400;
