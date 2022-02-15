@@ -8,8 +8,8 @@ import argparse
 # parameters: CloudFormation template file in json format, initials to use in stack name
 def create_sagemaker_nbi(cf_template, initials, region):
     # print starting message
-    print('Stack and notebook instance creation starting using initials:' + \
-        initials + ' and region:' + region)
+    print('Stack and notebook instance creation starting using initials: ' + \
+        initials + ' and region: ' + region)
     
     # create stack and notebook names
     stack_name = initials + '-sagemaker-notebook-stack'
@@ -34,7 +34,7 @@ def create_sagemaker_nbi(cf_template, initials, region):
         'ParameterValue': str(notebook_name)}], Capabilities = ['CAPABILITY_IAM'])
     waiter = cf_client.get_waiter('stack_create_complete')
     waiter.wait(StackName = stack_name)
-    print(stack_name + 'created successfully.')
+    print(stack_name + ' created successfully.')
 
 
 # main function
