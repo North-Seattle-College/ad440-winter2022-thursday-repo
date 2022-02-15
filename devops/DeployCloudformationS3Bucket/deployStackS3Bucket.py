@@ -53,7 +53,7 @@ def main(input_initials):
 #Reads in Stack Template File
 def _stack_template_file():
     stack_template = ''
-    with open(f"{script_dir}/stack_template.json", 'r') as fd:
+    with open(f"{script_dir}/stackTemplate.json", 'r') as fd:
         stack_template = fd.read()
     return stack_template
 
