@@ -1,0 +1,30 @@
+{
+    "Description": "Floop BasicNotebookInstance",
+    "Parameters" : {
+        "NotebookNameParameter" : {
+        "Type" : "String",
+        "Description" : "The name of the created SageMaker Notebook Instance"
+        }
+    },
+    "Resources": {
+        "BasicNotebookInstance": {
+            "Type": "AWS::SageMaker::NotebookInstance",
+            "Properties": {
+                "InstanceType": "ml.t3.medium",
+                "NotebookInstanceName": {
+                    "Ref" : "NotebookNameParameter"
+                },
+                "RoleArn": {
+                    "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/AWSSageMakerFullAccessRole"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "BasicNotebookInstanceId": {
+            "Value": {
+                "Ref": "BasicNotebookInstance"
+            }
+        }
+    }
+}
