@@ -1,6 +1,6 @@
 
 import boto3
-from os.path import dirname
+from os.path import dirname, abspath
 import argparse
 
 
@@ -50,7 +50,8 @@ if __name__ == "__main__":
     region = args.region
 
     # open CloudFormation template
-    script_dir = dirname(__file__)
+    script_dir = dirname(abspath(__file__))
+
     cf_template = ''
     with open(f"{script_dir}/sagemakerStackTemplate.json", 'r') as fd:
         cf_template = fd.read()
