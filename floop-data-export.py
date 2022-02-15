@@ -6,10 +6,13 @@ import os
 
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
-    certLoc = input('Enter full path of Floop Firebase cert file: ')
+    certLoc = 'floop-firebase-development-firebase-adminsdk-g8bpy-74eacd4956.json'
+    # input('Enter full path of Floop Firebase cert file: ')
     gPath = os.path.isfile(certLoc)
 
-    n = int(input('Enter the number of conversations required: '))
+#    n = int(input('Enter the number of conversations required: '))
+#   Removing input due to CLI integration as suggested
+    n=100
 
     if(gPath):
         break
@@ -23,19 +26,20 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+
 # pull conversation documents where 'Comment_Preview' field isn't certain
-#   text, and pulling a limit of 10k.
+#   text, and pulling a limit of 1k.
 conversations = db.collection(
     'Databases/Dev_Database/Conversations').where('Comment_Preview', 'not-in', [
-        'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(10000).get()
+        'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(n).get()
 
 if __name__ == '__main__':
 
     # Iniialize empty list, "cList"
     cList = []
-# For each item in Conversations, ea entry has a Messages collection
+    
+# For each item in Conversations, each entry has a Messages collection
 # all documents will be ordered by 'Date_Submitted' and only the first comment will be pulled.
-# For each document in the pulled list(currently limited to 1 per collection),
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
@@ -43,15 +47,13 @@ if __name__ == '__main__':
             'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
-            cList.append(entry.get("Text").strip())
+           # cList.append(entry.get("Text").strip())
+             cList.append({
+                'Text': entry.get("Text").strip()
+                #Sender: "Teacher" | "Student",
+            })
 
-# Convert cList to a Set to remove duplicate values
-#   -- faster than populating set initially
-# Convert back to list so json.dump can process it
-    arr = set(cList)
-    new_arr = list(arr)
-# Create new variable to store first "N" conversations
-    new_arr_n = new_arr[:n]
-# Write contents of list to json file
+
+# Write contents of document to json file
     with open('floop-conv-data_N.json', 'w') as f:
-        json.dump(new_arr_n, f)
+        json.dump(cList, f)
