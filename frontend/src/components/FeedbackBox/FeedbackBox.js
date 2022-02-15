@@ -1,11 +1,11 @@
 import "./Feedback.css"
-
-export default function FeedbackBox({feedback , setFeedback}) {
+{/* Task for David Nguyen */} 
+export default function FeedbackBox({feedback}) {
     return (
     <div>
-            <div className="analysis"><h2>Analysis</h2></div>
+            <div className="analysis"><h2>AI Feedback</h2></div>
             <div className="feedbackbox">
-            <div className="feedback"></div>
+            <div className="feedback">{feedback}</div>
         </div>
     </div>
     );
