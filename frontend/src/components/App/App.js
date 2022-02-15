@@ -7,14 +7,18 @@ import React, { useState } from "react";
 
 function App() {
   const [feedback, setFeedback] = useState('');
+  // Task for David Nguyen
+  const [show, setShow] = useState(false);
   return (
     <div className="App">
-      <InputBox feedback={feedback} setFeedback={setFeedback} />
+      <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
       <div className="userBtns">
-        <SubmitBtn feedback={feedback} setFeedback={setFeedback} />
-        <ClearBtn setFeedback={setFeedback} />
+        {/* Task for Payam Taherirostami: */}
+        <ClearBtn setFeedback={setFeedback} setShow={setShow} />
+        <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
       </div>
-      <FeedbackBox />
+      {/* Task for David Nguyen */}
+      {show && <FeedbackBox feedback={feedback} show={show} />}
     </div>
   );
 }

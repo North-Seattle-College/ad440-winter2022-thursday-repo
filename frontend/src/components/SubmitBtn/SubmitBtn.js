@@ -1,12 +1,12 @@
-import React from "react";
-
-export default function SubmitBtn({ feedback, setFeedback }) {
+// Task for Payam Taherirostami
+export default function SubmitBtn({ feedback, setFeedback, setShow }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    alert(`You entered: ${feedback}`)
-    setFeedback('')
+    setShow(true);
   }
   return (
-    <button onClick={handleSubmit}>Submit</button>
+    <div>
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
   );
 }

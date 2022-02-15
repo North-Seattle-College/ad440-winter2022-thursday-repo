@@ -5,7 +5,7 @@
 .userBtns {
   justify-content: center;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
 }
 
 .user-input {
