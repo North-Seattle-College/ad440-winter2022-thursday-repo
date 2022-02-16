@@ -3,6 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import json
 import os
+import pandas as pd
 
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
@@ -58,7 +59,8 @@ if __name__ == '__main__':
                     'uid': t_s_mapper[entry.get("Sender_ID").strip()]
                 })
 
+    df = pd.DataFrame(cList)
+    df.drop_duplicates(subset='Text',inplace = True)
 
-# Write contents of document to json file
-    with open('floop-conv-data_N.json', 'w') as f:
-        json.dump(cList, f)
+# Write contents of document to csv
+    df.to_csv('floop_conv_data.csv',index=False)
