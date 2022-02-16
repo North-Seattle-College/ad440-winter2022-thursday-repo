@@ -1,0 +1,20 @@
+Parameters:
+  LambdaName:
+    Description: New lambda function.
+    Type: String
+Resources:
+  makeLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Ref LambdaName
+      Role: arn:aws:iam::061431082068:role/Lambda_Role
+      Runtime: nodejs14.x
+      Handler: index.handler
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+              const response = {
+                  statusCode: 200,
+              };
+              return response;
+          };
