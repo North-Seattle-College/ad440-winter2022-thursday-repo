@@ -6,8 +6,7 @@ import os
 
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
-    certLoc = 'floop-firebase-development-firebase-adminsdk-g8bpy-74eacd4956.json'
-    # input('Enter full path of Floop Firebase cert file: ')
+    certLoc = input('Enter full path of Floop Firebase cert file: ')
     gPath = os.path.isfile(certLoc)
 
 #    n = int(input('Enter the number of conversations required: '))
@@ -43,15 +42,21 @@ if __name__ == '__main__':
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
+
+        # Creating dictionary for mapping Sender ID to Teacher or Student
+        t_s_mapper = convo.to_dict()['Participant_IDs']
+
         convo_entries = convo.reference.collection(
             'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
-           # cList.append(entry.get("Text").strip())
-             cList.append({
-                'Text': entry.get("Text").strip()
-                #Sender: "Teacher" | "Student",
-            })
+            # Checking for non-empty strings only
+            if entry.get("Text").strip()!='':
+
+                cList.append({
+                    'Text': entry.get("Text").strip(),
+                    'uid': t_s_mapper[entry.get("Sender_ID").strip()]
+                })
 
 
 # Write contents of document to json file
