@@ -3,13 +3,16 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import json
 import os
+import pandas as pd
 
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
     certLoc = input('Enter full path of Floop Firebase cert file: ')
     gPath = os.path.isfile(certLoc)
 
-    n = int(input('Enter the number of conversations required: '))
+#    n = int(input('Enter the number of conversations required: '))
+#   Removing input due to CLI integration as suggested
+    n=100
 
     if(gPath):
         break
@@ -23,8 +26,9 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
+
 # pull conversation documents where 'Comment_Preview' field isn't certain
-#   text, and pulling a limit of 10k.
+#   text, and pulling a limit of 1k.
 conversations = db.collection(
     'Databases/Dev_Database/Conversations').where('Comment_Preview', 'not-in', [
         'What is your goal for this year?', 'Audio Comment', 'Freeform', 'Freeform Comment', '', ' ']).limit(n).get()
@@ -33,18 +37,26 @@ if __name__ == '__main__':
 
     # Iniialize empty list, "cList"
     cList = []
-# For each item in Conversations, ea entry has a Messages collection
+    
+# For each item in Conversations, each entry has a Messages collection
 # all documents will be ordered by 'Date_Submitted' and only the first comment will be pulled.
-# For each document in the pulled list(currently limited to 1 per collection),
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
+<<<<<<< HEAD
         # save Participant_IDs for 'T' & 'S' for each convo
         # don't think order_by is needed now, as we'll be grabbing all the messages
+=======
+
+        # Creating dictionary for mapping Sender ID to Teacher or Student
+        t_s_mapper = convo.to_dict()['Participant_IDs']
+
+>>>>>>> dc35af5880430a6cf7d4fe0179efb8182aaab16b
         convo_entries = convo.reference.collection(
             'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
+<<<<<<< HEAD
             # append a pairing of Sender_ID and Text fields, where Sender_ID maches saved Participant_IDs from the convo_entries 
             cList.append(entry.get("Text").strip())
 
@@ -58,3 +70,18 @@ if __name__ == '__main__':
 # Write contents of list to json file
     with open('floop-conv-data_N.json', 'w') as f:
         json.dump(new_arr_n, f)
+=======
+            # Checking for non-empty strings only
+            if entry.get("Text").strip()!='':
+
+                cList.append({
+                    'Text': entry.get("Text").strip(),
+                    'uid': t_s_mapper[entry.get("Sender_ID").strip()]
+                })
+
+    df = pd.DataFrame(cList)
+    df.drop_duplicates(subset='Text',inplace = True)
+
+# Write contents of document to csv
+    df.to_csv('floop_conv_data.csv',index=False)
+>>>>>>> dc35af5880430a6cf7d4fe0179efb8182aaab16b
