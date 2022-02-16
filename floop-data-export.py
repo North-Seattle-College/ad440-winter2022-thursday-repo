@@ -12,7 +12,7 @@ while True:
 
 #    n = int(input('Enter the number of conversations required: '))
 #   Removing input due to CLI integration as suggested
-    n=100
+    n = 100
 
     if(gPath):
         break
@@ -37,42 +37,22 @@ if __name__ == '__main__':
 
     # Iniialize empty list, "cList"
     cList = []
-    
+
 # For each item in Conversations, each entry has a Messages collection
 # all documents will be ordered by 'Date_Submitted' and only the first comment will be pulled.
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
-<<<<<<< HEAD
-        # save Participant_IDs for 'T' & 'S' for each convo
-        # don't think order_by is needed now, as we'll be grabbing all the messages
-=======
 
         # Creating dictionary for mapping Sender ID to Teacher or Student
         t_s_mapper = convo.to_dict()['Participant_IDs']
 
->>>>>>> dc35af5880430a6cf7d4fe0179efb8182aaab16b
         convo_entries = convo.reference.collection(
             'Messages').order_by(u'Date_Submitted').get()
 
         for entry in convo_entries:
-<<<<<<< HEAD
-            # append a pairing of Sender_ID and Text fields, where Sender_ID maches saved Participant_IDs from the convo_entries 
-            cList.append(entry.get("Text").strip())
-
-# Convert cList to a Set to remove duplicate values
-#   -- faster than populating set initially
-# Convert back to list so json.dump can process it
-    arr = set(cList)
-    new_arr = list(arr)
-# Create new variable to store first "N" conversations
-    new_arr_n = new_arr[:n]
-# Write contents of list to json file
-    with open('floop-conv-data_N.json', 'w') as f:
-        json.dump(new_arr_n, f)
-=======
             # Checking for non-empty strings only
-            if entry.get("Text").strip()!='':
+            if entry.get("Text").strip() != '':
 
                 cList.append({
                     'Text': entry.get("Text").strip(),
@@ -80,8 +60,7 @@ if __name__ == '__main__':
                 })
 
     df = pd.DataFrame(cList)
-    df.drop_duplicates(subset='Text',inplace = True)
+    df.drop_duplicates(subset='Text', inplace=True)
 
 # Write contents of document to csv
-    df.to_csv('floop_conv_data.csv',index=False)
->>>>>>> dc35af5880430a6cf7d4fe0179efb8182aaab16b
+    df.to_csv('floop_conv_data.csv', index=False)
