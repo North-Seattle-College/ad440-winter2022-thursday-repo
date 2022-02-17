@@ -1,0 +1,99 @@
+swagger: "2.0"
+info:
+  description: "API for AI feedback Coach - AD440 Winter 2022"
+  version: "1.0"
+  title: "AI feedback Coach API"
+  termsOfService: "http://swagger.io/terms/"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/"
+paths:
+
+  /feedback:
+    post:
+      tags:
+      - "feedback"
+      summary: "Add feedback to Database"
+      description: "Add feedback to database"
+      operationId: "addFeedback"
+      consumes:
+      - "application/json"
+      produces:
+      - "integer"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "feedback"
+        required: true
+        schema:
+          $ref: "#/definitions/Feedback"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AIFeedback"                   
+        "400":
+          description: "Bad Request"     
+        "401":
+          description: "Unauthorized" 
+        "403":
+          description: "Forbidden"
+        "500":
+          description: "Internal Server Error"
+    get:
+      tags:
+      - "feedback"
+      summary: "Invalid Operation"
+      description: "Invalid Operation, cannot use GET request"
+      responses:
+        "401":
+          description: "Unauthorized" 
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Method Not Allowed" 
+    patch:
+      tags:
+      - "feedback"
+      summary: "Invalid Operation"
+      description: "Invalid Operation, cannot use PATCH request"
+      responses:
+        "401":
+          description: "Unauthorized" 
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Method Not Allowed" 
+    delete:
+      tags:
+      - "feedback"
+      summary: "Invalid Operation"
+      description: "Invalid Operation, cannot use DELETE request"
+      responses:
+        "401":
+          description: "Unauthorized" 
+        "403":
+          description: "Forbidden"
+        "405":
+          description: "Method Not Allowed" 
+          
+definitions:
+  Feedback:
+    type: "object"
+    properties:
+      feedback:
+        type: "string"
+
+  AIFeedback:
+    type: "object"
+    properties:
+      positiveRating:
+        type: "number"
+        format: "float"
+      negativeRating:
+        type: "number"
+        format: "float" 
+      neutralRating:
+        type: "number"
+        format: "float"

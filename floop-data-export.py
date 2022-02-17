@@ -5,7 +5,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import json
-import os
 import pandas as pd
 
 
@@ -48,12 +47,15 @@ else:
     conversations = db.collection(collection).where(
         'Comment_Preview', 'not-in', conditionals).limit(quantity).get()
 
+
 if __name__ == '__main__':
 
-    # Iniialize empty list, "cList"
+# Iniialize empty list, "cList"
     cList = []
 
+
 # For each item in Conversations, each entry has a Messages collection
+
 # all documents will be ordered by 'Date_Submitted' and only the first comment will be pulled.
 #    get value of "Text" field and add to cList
     for convo in conversations:
@@ -78,10 +80,7 @@ if __name__ == '__main__':
 
     # df = pd.DataFrame(cList)
     #df.drop_duplicates(subset='Text', inplace=True)
-    # print(df.head())
-    #json_buffer = io.StringIO()
-    # df.to_json('floop_conv_data.json', orient="records")
-    # df.to_json(json_buffer)
+
 
 
 # Initiate s3 connection to desired bucket and default object filename.
@@ -89,8 +88,9 @@ if __name__ == '__main__':
     s3object = s3.Object('ad440-mpg-floop-export-storage',
                          'auto-floop-s3-export3.json')
 
+
 # Put json of list into object and put into s3 bucket.
     s3object.put(
         Body=(bytes(json.dumps(cList).encode('UTF-8'))), ContentType='application/json'
-        # Body=(json_buffer.getvalue())
     )
+
