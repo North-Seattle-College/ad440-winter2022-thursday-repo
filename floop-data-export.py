@@ -61,6 +61,7 @@ if __name__ == '__main__':
 
     df = pd.DataFrame(cList)
     df.drop_duplicates(subset='Text',inplace = True)
+    df.to_json('floop_conv_data.json', orient="records")
 
 # Write contents of document to csv
-    df.to_csv('floop_conv_data.csv',index=False)
+   # df.to_csv('floop_conv_data.csv',index=False)
