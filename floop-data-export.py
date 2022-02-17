@@ -1,9 +1,11 @@
+from ast import Continue
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import json
 import os
 import pandas as pd
+import numpy as np
 
 # Get path of firebase cert from user. Prompt user if path doesnt exist
 while True:
@@ -37,7 +39,7 @@ if __name__ == '__main__':
 
     # Iniialize empty list, "cList"
     cList = []
-
+    seen = set()
 # For each item in Conversations, each entry has a Messages collection
 # all documents will be ordered by 'Date_Submitted' and only the first comment will be pulled.
 #    get value of "Text" field and add to cList
@@ -52,17 +54,28 @@ if __name__ == '__main__':
 
         for entry in convo_entries:
             # Checking for non-empty strings only
-            if entry.get("Text").strip() != '':
+            if entry.get("Text") != "":
+                continue
 
-                tempArr.append({
-                    'Text': entry.get("Text").strip(),
-                    'uid': t_s_mapper[entry.get("Sender_ID").strip()]
-                })
-
-        cList.append(tempArr)
+            tempArr.append({
+                'Text': entry.get("Text").strip(),
+                'uid': t_s_mapper[entry.get("Sender_ID").strip()]
+            })
+        if tempArr not in cList:
+            cList.append(tempArr)
 
     df = pd.DataFrame(cList)
     #df.drop_duplicates(subset='Text', inplace=True)
 
+    '''newlist = []
+    for item in cList:
+        t = tuple(item)
+    if t not in seen:
+        newlist.append(item)
+        seen.add(t) '''
 # Write contents of document to csv
-    df.to_json('floop_conv_data.json', orient="records")
+    # df.to_json('floop_conv_data.json', orient="records")
+
+    with open('test-data.json', 'w') as f:
+        #lists = cList.tolist()
+        json.dump(cList, f)
