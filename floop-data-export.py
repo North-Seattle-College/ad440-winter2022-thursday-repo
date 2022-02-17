@@ -43,7 +43,7 @@ if __name__ == '__main__':
 #    get value of "Text" field and add to cList
 
     for convo in conversations:
-
+        tempArr = []
         # Creating dictionary for mapping Sender ID to Teacher or Student
         t_s_mapper = convo.to_dict()['Participant_IDs']
 
@@ -54,13 +54,15 @@ if __name__ == '__main__':
             # Checking for non-empty strings only
             if entry.get("Text").strip() != '':
 
-                cList.append({
+                tempArr.append({
                     'Text': entry.get("Text").strip(),
                     'uid': t_s_mapper[entry.get("Sender_ID").strip()]
                 })
 
+        cList.append(tempArr)
+
     df = pd.DataFrame(cList)
-    df.drop_duplicates(subset='Text', inplace=True)
+    #df.drop_duplicates(subset='Text', inplace=True)
 
 # Write contents of document to csv
-    df.to_csv('floop_conv_data.csv', index=False)
+    df.to_json('floop_conv_data.json', orient="records")
