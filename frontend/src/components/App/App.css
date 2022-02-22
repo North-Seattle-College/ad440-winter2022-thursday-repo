@@ -62,3 +62,7 @@
   font-size: 20px;
   margin-right: 10px;
 }
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
