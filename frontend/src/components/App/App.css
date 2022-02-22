@@ -6,10 +6,12 @@
   justify-content: center;
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  
 }
 
 .user-input {
-  border: solid 2px #00807f;
+  border: solid 2px #00807F;
   background-color: #eeecec;
   padding: 12px;
   width: 30%;
@@ -21,7 +23,7 @@
   background-color: #ccc;
   font: 1.4em cursive;
   border-radius: 20px;
-  border: 3px solid #00807f;
+  border: 3px solid #00807F;
 }
 
 .analysis {
@@ -40,15 +42,25 @@
   text-align: left;
 }
 
-button {
+.submitBtn button {
   width: 120px;
   height: 50px;
-  border-radius: 10px;
-  background-color: #00807f;
-  border-color: white;
+  border-radius: 4px;
+  background-color: #00807F;
+  border-color: #eeecec;
   color: white;
   font-size: 20px;
-  font-style: bold;
+}
+
+.clearBtn button {
+  width: 120px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: white;
+  border-color: #eeecec;
+  color: #666666;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 :disabled {

@@ -12,10 +12,14 @@ function App() {
   return (
     <div className="App">
       <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+      {/* Task Task for Payam Taherirostami */}
       <div className="userBtns">
-        {/* Task for Payam Taherirostami: */}
-        <ClearBtn setFeedback={setFeedback} setShow={setShow} />
-        <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+          <div className="clearBtn">
+            <ClearBtn setFeedback={setFeedback} setShow={setShow} />
+          </div>
+          <div className="submitBtn">
+            <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+          </div>
       </div>
       {/* Task for David Nguyen */}
       {show && <FeedbackBox feedback={feedback} show={show} />}
