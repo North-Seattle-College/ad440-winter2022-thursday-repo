@@ -27,7 +27,7 @@
 }
 
 .analysis {
-  margin-left: -140px;
+/*   margin-left: -140px; */
 }
 
 .feedbackbox {
@@ -36,10 +36,13 @@
 }
 
 .feedback {
-  border: solid 2px black;
+  border: solid 2px #00807f;
+  background-color: #eeecec;
   padding: 12px;
   width: 30%;
+  font: -webkit-mini-control;
   text-align: left;
+
 }
 
 .submitBtn button {
