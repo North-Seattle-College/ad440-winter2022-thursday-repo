@@ -2,16 +2,18 @@ import json
 import boto3
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-'''def sentence_classification(sentence: str):
-        sid = SentimentIntensityAnalyzer()
-        ss = sid.polarity_scores(sentence)
 
-        if ss['pos'] > 0.3 and ss['neg'] < 0.1:
-            return 'positive'
-        elif ss['neg'] > 0.15:
-            return 'negative'
-        else:
-            return 'neutral' '''
+def sentence_classification(sentence: str):
+    sid = SentimentIntensityAnalyzer()
+    ss = sid.polarity_scores(sentence)
+
+    if ss['pos'] > 0.3 and ss['neg'] < 0.1:
+        return 'positive'
+    elif ss['neg'] > 0.15:
+        return 'negative'
+    else:
+        return 'neutral'
+
 
 # Initiate s3 connection to desired bucket and desired object filename.
 s3 = boto3.resource('s3')
@@ -34,16 +36,19 @@ print(fbList[3][1])
 # Plaeholder variables for string formatting - to be replaced with question/statement,
 #   positive/negative/neutral, and emotion matching later...?
 question = 'Test1'
-posNeg = 'Test2'
+posNeg = ''
 emotion = 'Test4'
 
 # For each item in fbList, check # of dictionaries in item. For each dictionary, update
 #   with new key:value of <'metadata':array of length 3> -- formatted for ea placeholder
 for x in fbList:
     for y in range(len(x)):
-        # - sentence = x[y].get('Text') - retrieve the value for key 'Text' (the fedback/replies to analyze)
-        # run Text value through analyzers?
-        '''posNeg = sentence_classification(sentence: str) '''
+        # - retrieve the value for key 'Text' (the fedback/replies to analyze)
+        sentence = x[y].get('Text')
+        # run Text value through analyzers
+        ''' question = ?????'''
+        posNeg = sentence_classification(sentence)
+        ''' emotion = ?????'''
 
         # save results into appropriate variables above?
 
