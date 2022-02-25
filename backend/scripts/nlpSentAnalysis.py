@@ -1,3 +1,6 @@
+import re
+
+
 def sentAnalyze(sentence):
 
     # lists of words that indicates question
@@ -24,8 +27,10 @@ def sentAnalyze(sentence):
             type_sentence.append('sentence')
         elif item == '?':
             type_sentence.append('question')
+        elif re.match('^[a-zA-Z0-9_]+$', item):
+            type_sentence.append('statement')
         else:
-            type_sentence.append('Unknown or Numbers')
+            type_sentence.append('Unknown')
 
     # If a question mark was not included, Look for wh_question words
     for item in first_words:

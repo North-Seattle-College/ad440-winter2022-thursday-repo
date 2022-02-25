@@ -365,6 +365,8 @@
  'terrified': 'fearful',
  'terrorized': 'fearful',
  'thankful': 'happy',
+ 'thanks': 'happy',
+ 'thank': 'happy',
  'threatened': 'fearful',
  'thwarted': 'powerless',
  'timid': 'fearful',
