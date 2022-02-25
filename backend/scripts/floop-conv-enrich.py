@@ -1,5 +1,17 @@
 import json
 import boto3
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
+'''def sentence_classification(sentence: str):
+        sid = SentimentIntensityAnalyzer()
+        ss = sid.polarity_scores(sentence)
+
+        if ss['pos'] > 0.3 and ss['neg'] < 0.1:
+            return 'positive'
+        elif ss['neg'] > 0.15:
+            return 'negative'
+        else:
+            return 'neutral' '''
 
 # Initiate s3 connection to desired bucket and desired object filename.
 s3 = boto3.resource('s3')
@@ -29,8 +41,10 @@ emotion = 'Test4'
 #   with new key:value of <'metadata':array of length 3> -- formatted for ea placeholder
 for x in fbList:
     for y in range(len(x)):
-        # - x[y].get('Text') - retrieve the value for key 'Text' (the fedback/replies to analyze)
+        # - sentence = x[y].get('Text') - retrieve the value for key 'Text' (the fedback/replies to analyze)
         # run Text value through analyzers?
+        '''posNeg = sentence_classification(sentence: str) '''
+
         # save results into appropriate variables above?
 
         # This updates each comment dictionary in fbList with metadata K:V.
