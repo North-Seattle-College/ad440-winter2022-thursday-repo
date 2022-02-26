@@ -30,6 +30,7 @@
   padding: 12px;
   width: 480px;
   max-width: 100%;
+  border-radius: 4px;
 }
 
 .page-header {
@@ -52,28 +53,28 @@
   text-align: left;
   width: 480px;
   max-width: 100%;
+  border-radius: 4px;
 
 }
 
 .submitBtn button {
-  width: 100px;
-  height: 45px;
+  width: 80px;
+  height: 35px;
   border-radius: 4px;
   background-color: #00807F;
   border-color: #eeecec;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .clearBtn button {
-  width: 100px;
-  height: 45px;
+  width: 80px;
+  height: 35px;
   border-radius: 4px;
-  background-color: white;
-  border-color: #eeecec;
-  color: #666666;
-  font-size: 15px;
+  border: solid 1px rgb(4, 199, 199);
+  font-size: 14px;
   margin-right: 10px;
+  color: #00807F;
 }
 
 :disabled {

@@ -6,7 +6,7 @@ export default function InputBox({ feedback, setFeedback, setShow }) {
         receive relevant coaching messages according to your feedback to improve
         it.
       </div>
-      <h3 className="input-header">Comment</h3>
+      <h4 className="input-header">Comment</h4>
       <input
         type="text"
         className="user-input"
