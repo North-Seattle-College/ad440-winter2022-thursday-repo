@@ -4,13 +4,17 @@ import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
+import logo from "../Logo/floop_logo.png"
 
 function App() {
   const [feedback, setFeedback] = useState('');
   // Task for David Nguyen
   const [show, setShow] = useState(false);
   return (
+    
     <div className="App">
+      <img className="logo" src={logo} alt="Logo" />
+      <div id="wrapper">
       <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
       {/* Task Task for Payam Taherirostami */}
       <div className="userBtns">
@@ -22,7 +26,9 @@ function App() {
           </div>
       </div>
       {/* Task for David Nguyen */}
+      <div id="feedbackTitle"><h3>Comment Feedback:</h3></div>
       {show && <FeedbackBox feedback={feedback} show={show} />}
+    </div>
     </div>
   );
 }
