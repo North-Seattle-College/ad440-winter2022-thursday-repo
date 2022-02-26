@@ -20,7 +20,7 @@
   width: 520px;
   max-width: 102%;
   min-width: 315px;
-  position: re
+  margin-bottom: 60px;
 }
 
 
@@ -54,7 +54,6 @@
   width: 480px;
   max-width: 100%;
   border-radius: 4px;
-
 }
 
 .submitBtn button {
