@@ -1,32 +1,47 @@
-#Deploys a Stack and S3 Bucket To Cloudformation.
+#Deploys a stack and s3 bucket to cloudformation.
 import boto3
 import re
 import os
 import sys
 import argparse
-
+import random
+import string
+from datetime import date
 from os.path import dirname
 script_dir = dirname(__file__)
 
-#Creates Cloudformation Client
+#Creates cloudformation client
 cf_client = boto3.client('cloudformation')
 
 def main(input_initials):
 
-    #Read In Stack Template File
+    #Read in stack template file
     stack_template = _stack_template_file()
 
-    #Parses Input Initials
+    #Parses input initials
     parser = argparse.ArgumentParser(description='Input Initials Required.')
     parser.add_argument('input_initials', metavar='input_initials', help='Input User Initials For Stack Name.', nargs='?', type=str)
     args = parser.parse_args()
 
-    #Gets Initials
+    #Gets initials
     initials = args.input_initials
     print("\nYour Initials Entered: " + initials + "\n")
 
-    #Uses Initials For Stack Name
-    stack_name = (initials + '-stack')
+    #Gererates unique id for name
+    unique_id = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5))
+
+    #Gets the date
+    today = date.today()
+    date_created = today.strftime("%m%d%y")
+
+    #Uses initials with stack name
+    stack_name = (initials + '-' + date_created + '-' + unique_id + '-stack')
+
+    #Uses stack with bucket name
+    bucket_name = (stack_name + '-reactapp-bucket')
+
+    #Creates bucket parameters
+    parameters=[ { 'ParameterKey': 'BucketName', 'ParameterValue': bucket_name }, ]
     
     #Verifies Initials
     patternAlpha = re.compile("[A-Za-z]+")
@@ -40,20 +55,26 @@ def main(input_initials):
         print("Error: Initials Must Not Be More Than 5 characters Long.\n")  
     else:
         print("Your Stack Will Be Named: " + "'" + stack_name + "'\n")
+        print("Your Bucket Will Be Named: " + "'" + bucket_name + "'\n")
         print("Please Wait While Your Stack and S3Bucket Are Being Deployed To Cloudformation.")
         print("Waiting...\n")
         if _stack_exists(stack_name):
             print("Error: A Stack Named " + "'" + stack_name + "' Already Exists, Please Try Again.\n")
         else:
-            stack_result = cf_client.create_stack(StackName=stack_name, TemplateBody=stack_template)
+            stack_result = cf_client.create_stack(StackName=stack_name, TemplateBody=stack_template, Parameters=parameters)
             waiter = cf_client.get_waiter('stack_create_complete')
             waiter.wait(StackName=stack_name)
-            print("Congradulations! Your Stack " + stack_name + " And S3Bucket Are Now Completed.\n")
-            
+            print("Congradulations! Your Stack " + stack_name + " And S3Bucket " + bucket_name + " Are Now Completed.\n")
+            #os.system("echo Hello from the other side!")
+            os.system("echo BUCKET_NAME=${bucket_name} >> $GITHUB_ENV")
+            #echo "BUCKET_NAME=bucketName" >> "$GITHUB_ENV"
+            #echo "{name}={value}" >> $GITHUB_ENV
+            #echo "BUCKET_NAME=${BUCKET_NAME}" >> $GITHUB_ENV
+
 #Reads in Stack Template File
 def _stack_template_file():
     stack_template = ''
-    with open(f"{script_dir}/stackTemplate.json", 'r') as fd:
+    with open(f"{script_dir}/stackTemplate_v3.json", 'r') as fd:
         stack_template = fd.read()
     return stack_template
 
