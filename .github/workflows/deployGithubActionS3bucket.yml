@@ -1,0 +1,66 @@
+name: Deploy_S3_Bucket
+
+on:
+  push:
+    branches:
+      - "issue_#44_github_action_s3bucket"
+      - "development"
+  pull_request:
+    branches:
+      - "issue_#44_github_action_s3bucket"
+      - "development"
+
+env:
+  GITHUB_ACTOR: ${GITHUB_ACTOR}
+
+jobs:
+  deploy_app_s3bucket:
+    runs-on: ubuntu-latest
+    environment:
+      name: Development
+      url: https://github.com/North-Seattle-College/ad440-winter2022-thursday-repo/tree/issue_%2344_github_action_s3bucket
+
+    steps:
+    - name: Sets Initials Environment Variable
+      run: echo "ACTOR_INITIALS=$(echo $GITHUB_ACTOR | cut -c 1-5)" >> $GITHUB_ENV
+
+    - name: Checkout Github Repo
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+
+    - name: Install Pip
+      run: python -m pip install --upgrade pip
+
+    - name: Install Boto3
+      run: python -m pip install boto3
+
+    - name: Run DeployCloudformationS3Bucket.py
+      working-directory: ./devops/DeployCloudformationS3Bucket
+      run: python deployStackS3Bucket.py ${{ env.ACTOR_INITIALS }}
+
+    - name: Install And Build React App
+      working-directory: ./frontend
+      run: |
+        npm install
+        npm run build
+
+    - name: Deploy Reactapp To S3Bucket
+      working-directory: ./frontend
+      run: aws s3 sync ./build s3://${{ env.BUCKET_NAME }}
+
+    - name: React App S3Bucket URL
+      run: echo "http://${{ env.BUCKET_NAME }}.s3-website-us-west-2.amazonaws.com"
+
+
+

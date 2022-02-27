@@ -2,7 +2,7 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "BucketName": {
-      "Description": "Name of your S3 bucket.",
+      "Description": "Name of S3 bucket.",
       "Type": "String",
       "Default": "reactapp-bucket"
     }

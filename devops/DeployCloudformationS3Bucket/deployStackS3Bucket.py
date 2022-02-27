@@ -1,4 +1,6 @@
-#Deploys a stack and s3 bucket to cloudformation.
+#Deploys a stack and S3bucket to cloudformation.
+
+#Imports Python libraries
 import boto3
 import re
 import os
@@ -6,13 +8,15 @@ import sys
 import argparse
 import random
 import string
+import subprocess
 from datetime import date
 from os.path import dirname
 script_dir = dirname(__file__)
 
 #Creates cloudformation client
-cf_client = boto3.client('cloudformation')
+cf_client = boto3.client('cloudformation', region_name='us-west-2')
 
+#Requires user initials input parameter.
 def main(input_initials):
 
     #Read in stack template file
@@ -20,28 +24,31 @@ def main(input_initials):
 
     #Parses input initials
     parser = argparse.ArgumentParser(description='Input Initials Required.')
-    parser.add_argument('input_initials', metavar='input_initials', help='Input User Initials For Stack Name.', nargs='?', type=str)
+    parser.add_argument('input_initials', metavar='input_initials', help='Input User Initials To Use In Stack Name.', nargs='?', type=str)
     args = parser.parse_args()
 
     #Gets initials
     initials = args.input_initials
     print("\nYour Initials Entered: " + initials + "\n")
 
-    #Gererates unique id for name
+    #Gererates unique id
     unique_id = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5))
 
     #Gets the date
     today = date.today()
     date_created = today.strftime("%m%d%y")
 
-    #Uses initials with stack name
-    stack_name = (initials + '-' + date_created + '-' + unique_id + '-stack')
-
+    #Uses initials, date, and unique id for stack name
+    delimiter = "-"
+    stack_vars = (initials, date_created, unique_id, 'stack')
+    stack_name = delimiter.join(stack_vars)
+    
     #Uses stack with bucket name
-    bucket_name = (stack_name + '-reactapp-bucket')
+    bucket_vars = (stack_name, 'reactapp', 'bucket')
+    bucket_name = delimiter.join(bucket_vars)
 
     #Creates bucket parameters
-    parameters=[ { 'ParameterKey': 'BucketName', 'ParameterValue': bucket_name }, ]
+    parameters=[ { 'ParameterKey': 'BucketName', 'ParameterValue': bucket_name } ]
     
     #Verifies Initials
     patternAlpha = re.compile("[A-Za-z]+")
@@ -55,30 +62,31 @@ def main(input_initials):
         print("Error: Initials Must Not Be More Than 5 characters Long.\n")  
     else:
         print("Your Stack Will Be Named: " + "'" + stack_name + "'\n")
-        print("Your Bucket Will Be Named: " + "'" + bucket_name + "'\n")
+        print("Your S3Bucket Will Be Named: " + "'" + bucket_name + "'\n")
         print("Please Wait While Your Stack and S3Bucket Are Being Deployed To Cloudformation.")
         print("Waiting...\n")
+        #Checks if stack already exists
         if _stack_exists(stack_name):
             print("Error: A Stack Named " + "'" + stack_name + "' Already Exists, Please Try Again.\n")
         else:
+            #Creates stack and S3bucket
             stack_result = cf_client.create_stack(StackName=stack_name, TemplateBody=stack_template, Parameters=parameters)
             waiter = cf_client.get_waiter('stack_create_complete')
             waiter.wait(StackName=stack_name)
             print("Congradulations! Your Stack " + stack_name + " And S3Bucket " + bucket_name + " Are Now Completed.\n")
-            #os.system("echo Hello from the other side!")
-            os.system("echo BUCKET_NAME=${bucket_name} >> $GITHUB_ENV")
-            #echo "BUCKET_NAME=bucketName" >> "$GITHUB_ENV"
-            #echo "{name}={value}" >> $GITHUB_ENV
-            #echo "BUCKET_NAME=${BUCKET_NAME}" >> $GITHUB_ENV
 
-#Reads in Stack Template File
+            #Echos bucket name as Github environment variable
+            echo_arg = ("echo BUCKET_NAME=" + bucket_name + " >> $GITHUB_ENV")
+            subprocess.Popen(echo_arg, shell=True)
+
+#Reads in stack template file
 def _stack_template_file():
     stack_template = ''
-    with open(f"{script_dir}/stackTemplate_v3.json", 'r') as fd:
+    with open(f"{script_dir}/StackTemplate.json", 'r') as fd:
         stack_template = fd.read()
     return stack_template
 
-#Checks if Stack Already Exists
+#Verifies if stack already exists
 def _stack_exists(stack_name):
     paginator = cf_client.get_paginator('list_stacks')
     for page in paginator.paginate():
@@ -88,5 +96,6 @@ def _stack_exists(stack_name):
             if stack['StackName'] == stack_name:
                 return True
 
+#Runs main program
 if __name__ == '__main__':
     main(*sys.argv[1:])
