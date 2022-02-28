@@ -4,7 +4,7 @@
   clear:both;
   max-width:500px;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 60px;
 
 }
 
@@ -17,10 +17,10 @@
   display: flex;
   flex-direction: row;
   margin-top: 10px;
-  width: 520px;
-  max-width: 102%;
-  min-width: 315px;
   margin-bottom: 60px;
+  margin-right: -8px;
+  min-width: 315px;
+  max-width: 550px;
 }
 
 
