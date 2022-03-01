@@ -3,7 +3,6 @@
 #Imports Python libraries
 import boto3
 import re
-import os
 import sys
 import argparse
 import random
@@ -24,7 +23,12 @@ def main(input_initials):
 
     #Parses input initials
     parser = argparse.ArgumentParser(description='Input Initials Required.')
-    parser.add_argument('input_initials', metavar='input_initials', help='Input User Initials To Use In Stack Name.', nargs='?', type=str)
+    parser.add_argument('input_initials', 
+                        metavar='input_initials', 
+                        help='Input User Initials To Use In Stack Name.', 
+                        nargs='?', 
+                        type=str)
+
     args = parser.parse_args()
 
     #Gets initials
@@ -35,8 +39,7 @@ def main(input_initials):
     unique_id = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5))
 
     #Gets the date
-    today = date.today()
-    date_created = today.strftime("%m%d%y")
+    date_created = date.today().strftime("%m%d%y")
 
     #Uses initials, date, and unique id for stack name
     delimiter = "-"
@@ -47,8 +50,9 @@ def main(input_initials):
     bucket_vars = (stack_name, 'reactapp', 'bucket')
     bucket_name = delimiter.join(bucket_vars)
 
-    #Creates bucket parameters
-    parameters=[ { 'ParameterKey': 'BucketName', 'ParameterValue': bucket_name } ]
+    #Creates bucket name parameter
+    parameters=[ { 'ParameterKey': 'BucketName',
+                 'ParameterValue': bucket_name } ]
     
     #Verifies Initials
     patternAlpha = re.compile("[A-Za-z]+")

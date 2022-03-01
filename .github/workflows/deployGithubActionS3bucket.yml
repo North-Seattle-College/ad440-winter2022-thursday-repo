@@ -14,7 +14,7 @@ env:
   GITHUB_ACTOR: ${GITHUB_ACTOR}
 
 jobs:
-  deploy_app_s3bucket:
+  Deploy React App S3Bucket:
     runs-on: ubuntu-latest
     environment:
       name: Development
