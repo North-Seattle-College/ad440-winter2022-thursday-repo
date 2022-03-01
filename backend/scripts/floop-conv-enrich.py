@@ -1,8 +1,6 @@
 import json
 import boto3
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from nlpEmoAnalysis import emoAnalyze
-from nlpSentAnalysis import sentAnalyze
 import string
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
