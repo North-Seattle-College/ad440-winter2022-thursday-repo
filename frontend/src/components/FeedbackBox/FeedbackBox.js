@@ -1,7 +1,7 @@
 import { usePromiseTracker } from "react-promise-tracker";
 import ReactLoading from 'react-loading';
 
-export default function FeedbackBox({ feedback }) {
+export default function FeedbackBox({ AIfeedback }) {
   const { promiseInProgress } = usePromiseTracker();
 
   const LoadingIndicator = () => {
@@ -12,5 +12,5 @@ export default function FeedbackBox({ feedback }) {
     );
   }
 
-  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">{feedback}</div>;
+  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">"{AIfeedback}"</div>;
 }

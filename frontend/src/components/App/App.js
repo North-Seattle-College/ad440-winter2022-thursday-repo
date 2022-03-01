@@ -7,24 +7,25 @@ import React, { useState } from "react";
 import logo from "../Logo/floop_logo.png"
 
 function App() {
-  const [feedback, setFeedback] = useState('');
+  const [input, setInput] = useState('');
+  const [AIfeedback, setAIfeedback] = useState();
   const [show, setShow] = useState(false);
   return (
 
     <div className="App">
       <img className="logo" src={logo} alt="Logo" />
       <div id="wrapper">
-        <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+        <InputBox input={input} setInput={setInput} setShow={setShow} />
         <div className="userBtns">
           <div className="clearBtn">
-            <ClearBtn setFeedback={setFeedback} setShow={setShow} />
+            <ClearBtn setInput={setInput} setShow={setShow} />
           </div>
           <div className="submitBtn">
-            <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+            <SubmitBtn input={input} setInput={setInput} setShow={setShow} setAIfeedback={setAIfeedback} />
           </div>
         </div>
         <div id="feedbackTitle"><h4>Comment Feedback:</h4></div>
-        {show && <FeedbackBox feedback={feedback} show={show} />}
+        {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />}
       </div>
     </div>
   );
