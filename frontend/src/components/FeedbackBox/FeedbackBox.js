@@ -12,5 +12,5 @@ export default function FeedbackBox({ AIfeedback }) {
     );
   }
 
-  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">"{AIfeedback}"</div>;
+  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">💡 "{AIfeedback}"</div>;
 }
