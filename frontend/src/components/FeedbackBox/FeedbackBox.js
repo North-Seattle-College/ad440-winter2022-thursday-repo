@@ -1,11 +1,16 @@
-// Task for David Nguyen
+import { usePromiseTracker } from "react-promise-tracker";
+import ReactLoading from 'react-loading';
+
 export default function FeedbackBox({ feedback }) {
-  return (
-    <div>
-      <div className="analysis"></div>
-      <div className="feedbackbox">
-        <div className="feedback">{feedback}</div>
+  const { promiseInProgress } = usePromiseTracker();
+
+  const LoadingIndicator = () => {
+    return (
+      <div className='loadingIcon'>
+        <ReactLoading type={'spin'} color={'#00807F'} height={'9%'} width={'9%'} />
       </div>
-    </div>
-  );
+    );
+  }
+
+  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">{feedback}</div>;
 }
