@@ -1,10 +1,15 @@
 import json
 import boto3
+import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import string
 from nltk.tokenize import word_tokenize
+from nltk.tokenize import punkt
 from nltk.corpus import stopwords
 import re
+
+# download needed packages
+nltk.download('punkt')
 
 
 # nltk method to analyze pos/neg/neutral sentiment of a provided string
