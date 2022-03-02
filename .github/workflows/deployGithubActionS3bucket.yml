@@ -5,10 +5,6 @@ on:
     branches:
       - "issue_#44_github_action_s3bucket"
       - "development"
-  pull_request:
-    branches:
-      - "issue_#44_github_action_s3bucket"
-      - "development"
 
 env:
   GITHUB_ACTOR: ${GITHUB_ACTOR}
