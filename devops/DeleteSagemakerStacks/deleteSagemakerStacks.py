@@ -10,10 +10,14 @@ def main():
     
     # create arguments for AWS region, flag for live run, and flag for confirm stack deletion
     parser = argparse.ArgumentParser()
-    parser.add_argument('--region', type = str, required=True, help='AWS region for CloudFormation client')
-    parser.add_argument('--prefix', type=str, help='enter a prefix to be added to the sagemaker search string for testing purposes')
-    parser.add_argument('--live_run', action='store_true', help='warning: identified stacks will be deleted on execution')
-    parser.add_argument('--confirm_delete', action='store_true', help='wait for confirmation of deletion for each stack - this will take awhile')
+    parser.add_argument('--region', type = str, required=True, \
+        help='AWS region for CloudFormation client')
+    parser.add_argument('--prefix', type=str, \
+        help='enter a prefix to be added to the sagemaker search string for testing purposes')
+    parser.add_argument('--live_run', action='store_true', \
+        help='warning: identified stacks will be deleted on execution')
+    parser.add_argument('--confirm_delete', action='store_true', \
+        help='wait for confirmation of deletion for each stack - this will take awhile')
     args = parser.parse_args()
     
     # create CloudFormation client in specified region
