@@ -105,7 +105,7 @@ def _stack_template_file():
         stack_template = fd.read()
     return stack_template
 
-#Verifies if stack already exists
+# Verifies if stack already exists
 def _stack_exists(stack_name):
     paginator = cf_client.get_paginator('list_stacks')
     for page in paginator.paginate():
