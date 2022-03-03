@@ -1,8 +1,8 @@
-export default function ClearBtn({ setFeedback, setShow }) {
+export default function ClearBtn({ setInput, setShow }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setShow(false);
-    setFeedback('')
+    setInput('')
   }
   return (
     <button onClick={handleSubmit}>Clear</button>
