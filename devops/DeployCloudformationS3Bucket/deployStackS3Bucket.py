@@ -63,15 +63,14 @@ def main(input_initials):
     bucket_vars = (stack_name, 'reactapp', 'bucket')
     bucket_name = delimiter.join(bucket_vars)
 
-    #Creates bucket name parameter
-    parameters=[ { 'ParameterKey': 'BucketName',
-                 'ParameterValue': bucket_name } ]
+    #Sets bucket name parameter
+    parameters=_set_parameters(bucket_name)
     
     #Creates stack and S3bucket
-    _create_stack(initials, stack_name, bucket_name, stack_template, parameters)
+    _create_stack_s3bucket(initials, stack_name, bucket_name, stack_template, parameters)
 
 #Verifies initials and creates new stack
-def _create_stack(initials, stack_name, bucket_name, stack_template, parameters):
+def _create_stack_s3bucket(initials, stack_name, bucket_name, stack_template, parameters):
     patternAlpha = re.compile("[A-Za-z]+")
     if patternAlpha.fullmatch(initials)==None:
         logger.error("Initials Must Contain Alphabetic Characters Only.\n")
@@ -116,6 +115,11 @@ def _stack_exists(stack_name):
                 continue
             if stack['StackName'] == stack_name:
                 return True
+
+#Sets parameters
+def _set_parameters(bucket_name):
+    return [ { 'ParameterKey': 'BucketName',
+               'ParameterValue': bucket_name } ]
 
 #Runs main program
 if __name__ == '__main__':
