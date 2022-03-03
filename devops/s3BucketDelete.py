@@ -13,7 +13,7 @@ print ('Before deleting the bucket we need to check if its empty.  Checking...')
 objs = client.list_objects_v2 (Bucket = bucket_name)
 filecount = objs ['KeyCount']
 print (filecount)
-filecount = objs ['Keycount']
+filecount = objs ['KeyCount']
        
 #need to make sure filecount is zero
        
