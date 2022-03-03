@@ -1,21 +1,23 @@
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+
 class Tokenizer:
 
     def __init__(self, text):
         self.text = text
-        import nltk
         self.nltk = nltk
-        from nltk.corpus import stopwords
-        nltk.download('stopwords')
         self.stopwords = set(stopwords.words('english'))
-        nltk.download('punkt')
-        nltk.download('averaged_perceptron_tagger')
         self.punctuation = nltk.RegexpTokenizer(r"\w+")
 
     def setText(self, newText):
         self.text = newText
 
     def addToText(self, newText):
-        self.text += newText
+        self.text += " " + newText
 
     def clearText(self):
         self.text = ""
@@ -36,6 +38,7 @@ text = "Generating random paragraphs can be an excellent way for writers to get 
 
 # test script
 token = Tokenizer(text)
+token.addToText("another sentence at the end")
 
 print('----------------------------------------')
 print('Sentences:')
