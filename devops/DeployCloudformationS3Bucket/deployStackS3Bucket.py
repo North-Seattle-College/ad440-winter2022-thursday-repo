@@ -16,7 +16,6 @@ script_dir = dirname(__file__)
 #Sets logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
 formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 file_handler = logging.FileHandler('deployStackS3Bucket.log')
 file_handler.setFormatter(formatter)
