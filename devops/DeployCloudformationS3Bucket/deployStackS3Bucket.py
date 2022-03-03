@@ -67,7 +67,11 @@ def main(input_initials):
     parameters=[ { 'ParameterKey': 'BucketName',
                  'ParameterValue': bucket_name } ]
     
-    #Verifies Initials
+    #Creates stack and S3bucket
+    _create_stack(initials, stack_name, bucket_name, stack_template, parameters)
+
+#Verifies initials and creates new stack
+def _create_stack(initials, stack_name, bucket_name, stack_template, parameters):
     patternAlpha = re.compile("[A-Za-z]+")
     if patternAlpha.fullmatch(initials)==None:
         logger.error("Initials Must Contain Alphabetic Characters Only.\n")
