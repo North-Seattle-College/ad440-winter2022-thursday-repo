@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Sets Initials Environment Variable
-      run: echo "ACTOR_INITIALS=$(echo $GITHUB_ACTOR | cut -c 1-5)" >> $GITHUB_ENV
+      run: echo "ACTOR_INITIALS=$(echo $GITHUB_ACTOR | cut -c 1-5 | sed 's/[0-9]*//g')" >> $GITHUB_ENV
 
     - name: Checkout Github Repo
       uses: actions/checkout@v2
