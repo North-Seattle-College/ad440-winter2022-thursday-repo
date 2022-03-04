@@ -88,6 +88,23 @@ definitions:
   AIFeedback:
     type: "object"
     properties:
+      feedback:
+        type: "string"
+      isQuestion: 
+        type: "boolean"
+      isQuestionConfidence:
+        type: "number"
+        format: "float"
+      isSentiment:
+        type: "string"
+      isSentimentConfidence:
+        type: "number"
+        format: "float"
+      isEmotion: 
+        type: "string"
+      isEmotionConfidence:
+        type: "number"
+        format: "float"
       positiveRating:
         type: "number"
         format: "float"
