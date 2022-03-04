@@ -8,9 +8,11 @@ export default function FeedbackBox({ AIfeedback }) {
     return (
       <div className='loadingIcon'>
         <ReactLoading type={'spin'} color={'#00807F'} height={'9%'} width={'9%'} />
-      </div>
+      </div>  
     );
   }
 
-  return promiseInProgress ? <LoadingIndicator /> : <div className="feedback">💡 "{AIfeedback}"</div>;
+  
+  return promiseInProgress ? 
+  <LoadingIndicator /> : <div><div><h4>Comment Feedback:</h4></div><div className="feedback">💡 "{AIfeedback}"</div></div>
 }

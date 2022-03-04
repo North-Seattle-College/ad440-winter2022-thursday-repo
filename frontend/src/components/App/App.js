@@ -24,7 +24,7 @@ function App() {
             <SubmitBtn input={input} setInput={setInput} setShow={setShow} setAIfeedback={setAIfeedback} />
           </div>
         </div>
-        <div id="feedbackTitle"><h4>Comment Feedback:</h4></div>
+        <div id="feedbackTitle"></div>
         {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />}
       </div>
     </div>
