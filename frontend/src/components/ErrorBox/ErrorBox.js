@@ -14,5 +14,5 @@ export default function ErrorBox() {
 
   
   return promiseInProgress ? 
-  <LoadingIndicator /> : <div><div><h4>Error:</h4></div><div className="feedback">  ❌  "ERROR request failed"</div></div>
+  <LoadingIndicator /> : <div><div><h4>Error:</h4></div><div className="error">  ❌  "ERROR request failed"</div></div>
 }
