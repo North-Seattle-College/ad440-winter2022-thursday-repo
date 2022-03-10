@@ -84,33 +84,55 @@ definitions:
     properties:
       feedback:
         type: "string"
+        description: "Feedback"
+        example: "This is a good feedback"
 
   AIFeedback:
     type: "object"
     properties:
       feedback:
         type: "string"
+        description: "Feedback"
+        example: "This is a good feedback"
       isQuestion: 
         type: "boolean"
+        description: "Feedback type"
+        example: "true"
       isQuestionConfidence:
         type: "number"
         format: "float"
+        description: "Confidence of the feedback"
+        example: "0.8"
       isSentiment:
         type: "string"
+        description: "Sentiment type"
+        example: "Is the sentiment good"
       isSentimentConfidence:
         type: "number"
         format: "float"
+        description: "Confidence of the sentiment"
+        example: "0.6"
       isEmotion: 
         type: "string"
+        description: "Emotion type"
+        example: "Is the emotion good"
       isEmotionConfidence:
         type: "number"
         format: "float"
+        description: "Confidence of the emotion"
+        example: "0.7"
       positiveRating:
         type: "number"
         format: "float"
+        description: "Positive rating"
+        example: "0.4"
       negativeRating:
         type: "number"
         format: "float" 
+        description: "Negative rating"
+        example: "0.5"
       neutralRating:
         type: "number"
         format: "float"
+        description: "Neutral rating"
+        example: "0.5"
