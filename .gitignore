@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+floop-firebase-development-firebase-adminsdk-g8bpy-74eacd4956.json
+floop-conv-data_N.json
+floop-conv-data.json
+floop_cov_data.csv
+
+#vscode
+.vscode/

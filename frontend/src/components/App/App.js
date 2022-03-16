@@ -4,21 +4,29 @@ import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
+import logo from "../Logo/floop_logo.png"
 
 function App() {
-  const [feedback, setFeedback] = useState('');
-  // Task for David Nguyen
+  const [input, setInput] = useState('');
+  const [AIfeedback, setAIfeedback] = useState();
   const [show, setShow] = useState(false);
   return (
+
     <div className="App">
-      <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
-      <div className="userBtns">
-        {/* Task for Payam Taherirostami: */}
-        <ClearBtn setFeedback={setFeedback} setShow={setShow} />
-        <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+      <img className="logo" src={logo} alt="Logo" />
+      <div id="wrapper">
+        <InputBox input={input} setInput={setInput} setShow={setShow} />
+        <div className="userBtns">
+          <div className="clearBtn">
+            <ClearBtn setInput={setInput} setShow={setShow} />
+          </div>
+          <div className="submitBtn">
+            <SubmitBtn input={input} setInput={setInput} setShow={setShow} setAIfeedback={setAIfeedback} />
+          </div>
+        </div>
+        <div id="feedbackTitle"><h4>Comment Feedback:</h4></div>
+        {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />}
       </div>
-      {/* Task for David Nguyen */}
-      {show && <FeedbackBox feedback={feedback} show={show} />}
     </div>
   );
 }

@@ -1,52 +1,94 @@
 .App {
+  width: 80%;
+  margin: 0 auto;
+  clear: both;
+  max-width: 500px;
   text-align: center;
+  margin-top: 60px;
+
+}
+
+#wrapper {
+  text-align: left;
 }
 
 .userBtns {
-  justify-content: center;
+  justify-content: right;
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 60px;
+  margin-right: -8px;
+  min-width: 315px;
+  max-width: 550px;
 }
+
 
 .user-input {
   border: solid 2px #00807F;
   background-color: #eeecec;
   padding: 12px;
-  width: 30%;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 4px;
 }
 
 .page-header {
-  width: 30%;
+  max-width: 500px;
+  min-width: 300px;
   margin: 0px auto;
-  background-color: #ccc;
-  font: 1.4em cursive;
+  margin-top: 50px;
+  text-align: left;
+  color: #00807F;
   border-radius: 20px;
-  border: 3px solid #00807F;
+  margin-bottom: 50px;
 }
 
-.analysis {
-  margin-left: -140px;
+
+.feedback {
+  border: solid 2px #FFDE7D;
+  background-color: white;
+  padding: 12px;
+  font: -webkit-mini-control;
+  text-align: left;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 4px;
 }
 
-.feedbackbox {
+.loadingIcon {
   display: flex;
   justify-content: center;
 }
 
-.feedback {
-  border: solid 2px black;
-  padding: 12px;
-  width: 30%;
-  text-align: left;
+.submitBtn button {
+  width: 80px;
+  height: 35px;
+  border-radius: 4px;
+  background-color: #00807F;
+  border-color: #eeecec;
+  color: white;
+  font-size: 14px;
 }
 
-button {
-  width: 120px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #00807F;
-  border-color: white;
-  color: white;
-  font-size: 20px;
-  font-style: bold;
+.clearBtn button {
+  width: 80px;
+  height: 35px;
+  border-radius: 4px;
+  border: solid 1px rgb(4, 199, 199);
+  font-size: 14px;
+  margin-right: 10px;
+  color: #00807F;
+}
+
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.logo {
+  margin-top: 40px;
+  height: 60px;
+  width: 300px;
+  margin: 0 auto;
 }
