@@ -28,6 +28,7 @@ function App() {
         </div>
         <div id="feedbackTitle"></div>
         {show? <FeedbackBox AIfeedback={AIfeedback} show={show} /> : <ErrorBox  error={error} />}
+        {/* {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />} */}
       </div>
     </div>
   );

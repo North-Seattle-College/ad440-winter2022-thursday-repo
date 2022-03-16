@@ -11,9 +11,14 @@ export default function SubmitBtn({ input, setShow, setAIfeedback }) {
         body: JSON.stringify({ input }), // convert to JSON
         headers: { "Content-Type": "application/json" }, // get the response data in that format
       })
-        .then(response => response.json())
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+        }
+          throw new Error("Request Failed");
+        })
         .then(feedback => setAIfeedback(feedback))
-        .catch(e => console.error("Error indicated:", e)));
+        .catch(e => console.error(e)));
     setShow(true);
   };
 
