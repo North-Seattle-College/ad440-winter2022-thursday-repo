@@ -56,6 +56,17 @@
   border-radius: 4px;
 }
 
+.error {
+  border: solid 2px red;
+  background-color: white;
+  padding: 12px;
+  font: -webkit-mini-control;
+  text-align: left;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
 .loadingIcon {
   display: flex;
   justify-content: center;
