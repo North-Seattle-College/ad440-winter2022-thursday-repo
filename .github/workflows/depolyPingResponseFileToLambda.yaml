@@ -1,32 +1,47 @@
 name: Deploy ping response script to lambda
 on:
   push:
-    paths:
-      - "backend/lambda/simplePing/index.js"
+    branches:
+      - "development"
+      - "issue#23_jsk_create-github-action"
+      paths:
+        - "backend/lambda/simplePing/index.js"
 jobs:
   job1:
-    deploy_source:
+    deploy_lambda:
       name: build and deploy lambda
       strategy:
         matrix:
           node-version: [14.x]
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v1
+        - name: Checkout GitHub repo
+          uses: actions/checkout@v2
+
+        - name: Configure AWS Credentials
+          uses: aws-actions/configure-aws-credentials@v1
+            with:
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: us-west-2
+
         - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
+          uses: actions/setup-node@v2
           with:
             node-version: ${{ matrix.node-version }}
+
         - name: npm install and build
           run: |
             npm ci
             npm run build --if-present
           env:
             CI: true
+
         - name: zip
           uses: montudor/action-zip@v0.1.0
           with:
             args: zip -qq -r ./bundle.zip ./
+
         - name: default deploy
           uses: appleboy/lambda-action@master
           with:
