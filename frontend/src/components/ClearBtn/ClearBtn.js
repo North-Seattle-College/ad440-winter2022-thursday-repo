@@ -1,7 +1,6 @@
-export default function ClearBtn({ setInput, setShow }) {
+export default function ClearBtn({ setInput }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setShow(false);
     setInput('')
   }
   return (

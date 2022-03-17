@@ -1,6 +1,6 @@
 import { trackPromise } from "react-promise-tracker";
 
-export default function SubmitBtn({ input, setShow, setAIfeedback }) {
+export default function SubmitBtn({ input, setAIfeedback, setAPIResponse }) {
   const url = "https://9u4xt4nqr1.execute-api.us-west-2.amazonaws.com/default/test";
 
   const handleSubmit = evt => {
@@ -8,18 +8,14 @@ export default function SubmitBtn({ input, setShow, setAIfeedback }) {
     trackPromise(
       fetch(url, {
         method: "POST",
-        body: JSON.stringify({ input }), // convert to JSON
-        headers: { "Content-Type": "application/json" }, // get the response data in that format
+        body: JSON.stringify({ input }),
+        headers: { "Content-Type": "application/json" },
       })
         .then((response) => {
-          if (response.ok) {
-            return response.json();
-        }
-          throw new Error("Request Failed");
+          setAPIResponse(response.status);
         })
         .then(feedback => setAIfeedback(feedback))
         .catch(e => console.error(e)));
-    setShow(true);
   };
 
   return (
