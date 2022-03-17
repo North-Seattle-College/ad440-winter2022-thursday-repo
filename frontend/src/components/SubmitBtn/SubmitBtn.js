@@ -12,6 +12,10 @@ export default function SubmitBtn({ input, setAIfeedback, setAPIResponse }) {
         headers: { "Content-Type": "application/json" },
       })
         .then((response) => {
+          if (response.ok) {
+            setAPIResponse(response.status);
+            return response.json();
+          }  
           setAPIResponse(response.status);
         })
         .then(feedback => setAIfeedback(feedback))
