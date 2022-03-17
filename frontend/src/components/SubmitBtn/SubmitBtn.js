@@ -1,7 +1,7 @@
 import { trackPromise } from "react-promise-tracker";
 
 export default function SubmitBtn({ input, setShow, setAIfeedback }) {
-  const url = "https://9u4xt4nqr1.execute-api.us-west-2.amazonaws.com/default/test";
+  const url = "https://api.seredium.com/v1/feedback";
 
   const handleSubmit = evt => {
     evt.preventDefault();
