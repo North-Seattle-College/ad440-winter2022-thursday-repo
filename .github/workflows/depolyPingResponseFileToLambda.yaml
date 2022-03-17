@@ -1,7 +1,7 @@
 name: Deploy ping response script to lambda
 on:
   push:
-    branches:
+    branch:
       - "development"
       - "issue#23_jsk_create-github-action"
       paths:
