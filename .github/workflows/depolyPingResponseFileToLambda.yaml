@@ -1,4 +1,4 @@
-name: Deploy ping response script to lambda
+name: Deploy ping response file to lambda
 on:
   push:
     branches:
