@@ -1,31 +1,31 @@
 import "./App.css";
 import InputBox from "../InputBox/InputBox";
-import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
-import logo from "../Logo/floop_logo.png"
+import logo from "../Logo/floop_logo.png";
+import ResponseBox from "../ResponseBox/ResponseBox";
 
 function App() {
   const [input, setInput] = useState('');
   const [AIfeedback, setAIfeedback] = useState();
-  const [show, setShow] = useState(false);
-  return (
+  const [APIResponse, setAPIResponse] = useState();
 
+  return (
     <div className="App">
       <img className="logo" src={logo} alt="Logo" />
       <div id="wrapper">
-        <InputBox input={input} setInput={setInput} setShow={setShow} />
+        <InputBox input={input} setInput={setInput} />
         <div className="userBtns">
           <div className="clearBtn">
-            <ClearBtn setInput={setInput} setShow={setShow} />
+            <ClearBtn setInput={setInput} />
           </div>
           <div className="submitBtn">
-            <SubmitBtn input={input} setInput={setInput} setShow={setShow} setAIfeedback={setAIfeedback} />
+            <SubmitBtn input={input} setAIfeedback={setAIfeedback} setAPIResponse={setAPIResponse} />
           </div>
         </div>
-        <div id="feedbackTitle"><h4>Comment Feedback:</h4></div>
-        {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />}
+        <div id="feedbackTitle"></div>
+        <ResponseBox AIfeedback={AIfeedback} APIResponse={APIResponse} />
       </div>
     </div>
   );

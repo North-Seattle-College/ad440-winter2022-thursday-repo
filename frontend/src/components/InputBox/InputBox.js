@@ -1,4 +1,4 @@
-export default function InputBox({ input, setInput, setShow }) {
+export default function InputBox({ input, setInput }) {
   return (
     <div className="input-main">
       <div className="page-header">
@@ -10,7 +10,6 @@ export default function InputBox({ input, setInput, setShow }) {
         className="user-input"
         value={input}
         onChange={e => setInput(e.target.value)}
-        onFocus={() => setShow(false)}
       />
     </div>
   );
