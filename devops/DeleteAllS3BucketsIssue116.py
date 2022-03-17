@@ -3,5 +3,9 @@
 
 import boto3
 client = boto3.client('s3')
+response = client.list_buckets()
+for name in response ['Buckets']:
+    print (name['Name'])
+
 response = client.delete_buckets()
 print(response)
