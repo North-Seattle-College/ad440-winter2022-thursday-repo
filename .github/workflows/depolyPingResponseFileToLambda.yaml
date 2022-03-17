@@ -1,11 +1,11 @@
 name: Deploy ping response script to lambda
 on:
   push:
-    branch:
-      - "development"
+    branches:
       - "issue#23_jsk_create-github-action"
-      paths:
-        - "backend/lambda/simplePing/index.js"
+      - "development"
+    paths:
+      - "backend/lambda/simplePing/index.js"
 jobs:
   job1:
     deploy_lambda:
