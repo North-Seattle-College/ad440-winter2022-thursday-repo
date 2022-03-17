@@ -1,7 +1,7 @@
 import requests
 import argparse
 
-# main driver function that identifies and deletes SageMaker stacks
+# main driver function that gets http header info for target URL and checks for xss vulnerabilities
 # argument --url: optional target URL to check for vulnerabilities
 def main():
     # default target URL
