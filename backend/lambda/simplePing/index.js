@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
                 body = ( [{
                 'id': 1,
                 'title': 'Hello from Lambda',
-                'description': 'Jonathon Kindle Coming from Lambda in AWS'
+                'description': 'Jonathon Coming from Lambda in AWS'
             },
             {
                 'id': 2,
