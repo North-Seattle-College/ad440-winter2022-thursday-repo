@@ -83,7 +83,7 @@ def sentAnalyze(sentence):
         elif item == '?':
             type_sentence.append('question')
         elif re.match('^[a-zA-Z0-9_]+$', item):
-            type_sentence.append('statement')
+            type_sentence.append('sentence')
         else:
             type_sentence.append('Unknown')
 
@@ -97,7 +97,7 @@ def sentAnalyze(sentence):
 
 
 def createSample():
-    for x in range(50):
+    for x in range(1000):
         fbList.append(data[x])
 
     # Placeholder variables for string formatting - to be replaced with question/statement,
@@ -146,7 +146,7 @@ def main():
 
     # Define new object to be put in s3
     enrichObj = s3.Object('ad440-mpg-floop-export-storage',
-                          'enriched-conv-sample.json')
+                          'enriched-conv-1k-2.json')
 
     # Put json of fbList into object and put into s3 bucket.
     enrichObj.put(
