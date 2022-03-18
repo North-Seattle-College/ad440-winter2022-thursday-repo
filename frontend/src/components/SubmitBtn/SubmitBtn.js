@@ -1,6 +1,6 @@
 import { trackPromise } from "react-promise-tracker";
 
-export default function SubmitBtn({ input, setShow, setAIfeedback }) {
+export default function SubmitBtn({ input, setAPIResponse, setAIfeedback }) {
   const url = "https://api.seredium.com/v1/feedback";
 
   const handleSubmit = evt => {
@@ -13,7 +13,6 @@ export default function SubmitBtn({ input, setShow, setAIfeedback }) {
       })
         .then((response) => {
           if (response.ok) {
-            setAPIResponse(response.status);
             return response.json();
           }  
           setAPIResponse(response.status);
