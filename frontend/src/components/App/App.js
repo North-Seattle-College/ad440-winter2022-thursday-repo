@@ -20,7 +20,7 @@ function App() {
         <InputBox input={input} setInput={setInput} />
         <div className="userBtns">
           <div className="clearBtn">
-            <ClearBtn setInput={setInput} />
+            <ClearBtn setInput={setInput} setShow={setShow} />
           </div>
           <div className="submitBtn">
             <SubmitBtn
