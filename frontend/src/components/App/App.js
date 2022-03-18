@@ -5,11 +5,13 @@ import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
 import logo from "../Logo/floop_logo.png";
 import ResponseBox from "../ResponseBox/ResponseBox";
+import FeedbackBox from "../FeedbackBox/FeedbackBox";
 
 function App() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [AIfeedback, setAIfeedback] = useState();
   const [APIResponse, setAPIResponse] = useState();
+  const [show, setShow] = useState(false);
 
   return (
     <div className="App">
@@ -21,11 +23,17 @@ function App() {
             <ClearBtn setInput={setInput} />
           </div>
           <div className="submitBtn">
-            <SubmitBtn input={input} setAIfeedback={setAIfeedback} setAPIResponse={setAPIResponse} />
+            <SubmitBtn
+              input={input}
+              setAIfeedback={setAIfeedback}
+              setAPIResponse={setAPIResponse}
+              setShow={setShow}
+            />
           </div>
         </div>
         <div id="feedbackTitle"></div>
         <ResponseBox AIfeedback={AIfeedback} APIResponse={APIResponse} />
+        {show && <FeedbackBox AIfeedback={AIfeedback} show={show} />}
       </div>
     </div>
   );
