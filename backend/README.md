@@ -2,9 +2,58 @@
 
 -----
 
+## Integrated API Documentation
+
+Integrated API URL: <https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/demo/splitSentences>
+
+See [splitSentences API](#splitSentence) below on how to submit a request.
+
+**Note:** the API is _slow_ (~10 sec via Postman), and memory intensive due to one of the dependencies we used. Try not to call on it too often or we will get a bigger bill than what we already have. 😬
+
+example output:
+
+```JSON
+{
+    "result": {
+        "sentences": [
+            {
+                "sentence": "Generating random paragraphs can be an excellent way for writers to get their creative flow going at the beginning of the day.",
+                "sentiment": "neutral",
+                "sentimentScore": 0.765,
+                "emotion": "Happy",
+                "isQuestion": false
+            },
+            {
+                "sentence": "The writer has no idea what topic the random paragraph will be about when it appears.",
+                "sentiment": "neutral",
+                "sentimentScore": -0.296,
+                "emotion": "Sad",
+                "isQuestion": false
+            },
+            {
+                "sentence": "This forces the writer to use creativity to complete one of three common writing challenges.",
+                "sentiment": "neutral",
+                "sentimentScore": 0.4404,
+                "emotion": "Fear",
+                "isQuestion": false
+            },
+            {
+                "sentence": "The writer can use the paragraph as the first one of a short story and build upon it.",
+                "sentiment": "neutral",
+                "sentimentScore": 0.0,
+                "emotion": "Angry",
+                "isQuestion": false
+            },
+        ]
+    }
+}
+```
+
+-----
+
 ## Split paragraph into sentences (Tokenizer) API Documentation
 
-> Author: Steven Wang  
+> Author: Steven Wang
 > GitHub: @shipitsteven
 
 Base API URL: <https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/tokenize/>
