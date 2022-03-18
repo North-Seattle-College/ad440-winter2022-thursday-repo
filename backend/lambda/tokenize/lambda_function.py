@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     try:
         text = event["text"]
         op = event["path"]
-    except:
+    except KeyError:
         result = {
             "error": "missing input for request body and/or improper endpoints, proper request requires following format: {'text': '[string to be parsed]'}, proper end points are '[API_URL]/tokenize/[operation]'"
         }
@@ -30,17 +30,11 @@ def lambda_handler(event, context):
         elif not isinstance(text, str):
             result = {"error": "text provided is not a string or invalid type"}
         elif op == "splitSentences":
-            result = {
-                "sentences": token.splitSentences()
-            }
+            result = {"sentences": token.splitSentences()}
         elif op == "splitWords":
-            result = {
-                "words": token.splitWords()
-            }
+            result = {"words": token.splitWords()}
         elif op == "removeStopwords":
-            result = {
-                "words": token.removeStopwords()
-            }
+            result = {"words": token.removeStopwords()}
 
     response = {
         "result": result,
