@@ -2,7 +2,6 @@
 and it will not work without modification"""
 
 import json
-from math import isqrt
 import nltk
 import requests
 nltk.download('punkt')
@@ -12,10 +11,11 @@ nltk.download('punkt')
 
 
 def lambda_handler(event=None, context=None):
-    sentence = None
+    sentence = "Who am I"
     # sentence = event["sentence"]
-    sentence.lower()
-    tokens = nltk.word_tokenize(sentence)
+    
+    print(sentence)
+    tokens = nltk.word_tokenize(sentence.lower())
     tokenlist = ''
     firstword = tokens[0]
     print(firstword)
