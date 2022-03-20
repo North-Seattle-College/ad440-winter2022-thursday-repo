@@ -80,7 +80,6 @@ def main():
 
     # Calculate conversation lengths
     conversation_length = get_conversation_length(conversations)
-    print(conversation_length)
     check_response_count(conversations)
 
     # Get clusters
