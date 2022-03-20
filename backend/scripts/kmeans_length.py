@@ -1,4 +1,6 @@
 from sklearn.cluster import KMeans
+from sklearn.utils.testing import ignore_warnings
+from sklearn.exceptions import ConvergenceWarning
 import matplotlib.pyplot as plt
 import json
 import pandas as pd
@@ -17,6 +19,7 @@ def get_conversation_length(sentences: dict) -> list:
     return out
 
 
+@ignore_warnings(category=ConvergenceWarning)
 def get_cluster_count(conversations: list) -> int:
     inertia_values = []
     for i in range(1, MAX_CLUSTERS + 1):
