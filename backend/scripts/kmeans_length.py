@@ -7,13 +7,13 @@ import sys
 import os
 
 MAX_CLUSTERS = 10
-INERTIA_THRESHOLD = 5
+INERTIA_THRESHOLD = 1
 
 
 def get_conversation_length(sentences: dict) -> list:
     out = []
     for key in sentences:
-        out.append([len(sentences[key]), 0])
+        out.append([len(key), 0])
     return out
 
 
@@ -61,7 +61,6 @@ def output_plot(df: pd.DataFrame):
 
 
 def get_filename_from_input_args(args: list) -> str:
-    print(args)
     files_in_dir = os.listdir(os.getcwd())
 
     if len(args) < 2:
@@ -81,6 +80,7 @@ def main():
 
     # Calculate conversation lengths
     conversation_length = get_conversation_length(conversations)
+    print(conversation_length)
     check_response_count(conversations)
 
     # Get clusters
