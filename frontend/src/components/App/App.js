@@ -1,24 +1,42 @@
 import "./App.css";
 import InputBox from "../InputBox/InputBox";
-import FeedbackBox from "../FeedbackBox/FeedbackBox";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import SubmitBtn from "../SubmitBtn/SubmitBtn";
 import React, { useState } from "react";
+import logo from "../Logo/floop_logo.png";
+import ResponseBox from "../ResponseBox/ResponseBox";
 
 function App() {
-  const [feedback, setFeedback] = useState('');
-  // Task for David Nguyen
-  const [show, setShow] = useState(false);
+  const [input, setInput] = useState("");
+  const [AIfeedback, setAIfeedback] = useState([]);
+  const [APIResponse, setAPIResponse] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <div className="App">
-      <InputBox feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
-      <div className="userBtns">
-        {/* Task for Payam Taherirostami: */}
-        <ClearBtn setFeedback={setFeedback} setShow={setShow} />
-        <SubmitBtn feedback={feedback} setFeedback={setFeedback} setShow={setShow} />
+      <img className="logo" src={logo} alt="Logo" />
+      <div id="wrapper">
+        <InputBox input={input} setInput={setInput} />
+        <div className="userBtns">
+          <div className="clearBtn">
+            <ClearBtn setInput={setInput} />
+          </div>
+          <div className="submitBtn">
+            <SubmitBtn
+              input={input}
+              setAIfeedback={setAIfeedback}
+              setAPIResponse={setAPIResponse}
+              setIsLoading={setIsLoading}
+            />
+          </div>
+        </div>
+        <div id="feedbackTitle"></div>
+        <ResponseBox
+          AIfeedback={AIfeedback}
+          APIResponse={APIResponse}
+          isLoading={isLoading}
+        />
       </div>
-      {/* Task for David Nguyen */}
-      {show && <FeedbackBox feedback={feedback} show={show} />}
     </div>
   );
 }

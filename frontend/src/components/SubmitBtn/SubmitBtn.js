@@ -1,12 +1,38 @@
-// Task for Payam Taherirostami
-export default function SubmitBtn({ feedback, setFeedback, setShow }) {
-  const handleSubmit = (evt) => {
+export default function SubmitBtn({
+  input,
+  setAPIResponse,
+  setAIfeedback,
+  setIsLoading,
+}) {
+  const url =
+    "https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/demo/splitSentences";
+
+  const handleSubmit = evt => {
+    setIsLoading(true);
     evt.preventDefault();
-    setShow(true);
-  }
+    fetch(url, {
+      method: "POST",
+      body: `{"text": "${input}" }`,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(response => {
+        setAPIResponse(response.status);
+        if (response.ok) {
+          return response.json();
+        }
+        setIsLoading(false);
+      })
+      .then(feedback => {
+        setAIfeedback(feedback.result.sentences);
+        setIsLoading(false);
+      });
+  };
+
   return (
     <div>
-      <button onClick={handleSubmit}>Submit</button>
+      <button disabled={!input} onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
 }
