@@ -4,8 +4,7 @@ export default function SubmitBtn({
   setAIfeedback,
   setIsLoading,
 }) {
-  const url =
-    "https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/demo/splitSentences";
+  const url = "https://api.seredium.com/v1/feedback/splitSentences";
 
   const handleSubmit = evt => {
     setIsLoading(true);
