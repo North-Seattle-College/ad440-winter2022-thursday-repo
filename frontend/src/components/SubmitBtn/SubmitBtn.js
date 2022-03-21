@@ -1,24 +1,31 @@
-import { trackPromise } from "react-promise-tracker";
-
-export default function SubmitBtn({ input, setAPIResponse, setAIfeedback }) {
-  const url = "https://api.seredium.com/v1/feedback";
+export default function SubmitBtn({
+  input,
+  setAPIResponse,
+  setAIfeedback,
+  setIsLoading,
+}) {
+  const url =
+    "https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/demo/splitSentences";
 
   const handleSubmit = evt => {
+    setIsLoading(true);
     evt.preventDefault();
-    trackPromise(
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify({ input }),
-        headers: { "Content-Type": "application/json" },
+    fetch(url, {
+      method: "POST",
+      body: `{"text": "${input}" }`,
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(response => {
+        setAPIResponse(response.status);
+        if (response.ok) {
+          return response.json();
+        }
+        setIsLoading(false);
       })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }  
-          setAPIResponse(response.status);
-        })
-        .then(feedback => setAIfeedback(feedback))
-        .catch(e => console.error(e)));
+      .then(feedback => {
+        setAIfeedback(feedback.result.sentences);
+        setIsLoading(false);
+      });
   };
 
   return (

@@ -7,9 +7,10 @@ import logo from "../Logo/floop_logo.png";
 import ResponseBox from "../ResponseBox/ResponseBox";
 
 function App() {
-  const [input, setInput] = useState('');
-  const [AIfeedback, setAIfeedback] = useState();
+  const [input, setInput] = useState("");
+  const [AIfeedback, setAIfeedback] = useState([]);
   const [APIResponse, setAPIResponse] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="App">
@@ -21,11 +22,20 @@ function App() {
             <ClearBtn setInput={setInput} />
           </div>
           <div className="submitBtn">
-            <SubmitBtn input={input} setAIfeedback={setAIfeedback} setAPIResponse={setAPIResponse} />
+            <SubmitBtn
+              input={input}
+              setAIfeedback={setAIfeedback}
+              setAPIResponse={setAPIResponse}
+              setIsLoading={setIsLoading}
+            />
           </div>
         </div>
         <div id="feedbackTitle"></div>
-        <ResponseBox AIfeedback={AIfeedback} APIResponse={APIResponse} />
+        <ResponseBox
+          AIfeedback={AIfeedback}
+          APIResponse={APIResponse}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );
