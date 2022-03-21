@@ -1,23 +1,30 @@
-export default function SubmitBtn({ input, setAPIResponse, setAIfeedback }) {
+export default function SubmitBtn({
+  input,
+  setAPIResponse,
+  setAIfeedback,
+  setIsLoading,
+}) {
   const url =
     "https://3s7yrqtdmb.execute-api.us-west-2.amazonaws.com/demo/splitSentences";
 
   const handleSubmit = evt => {
+    setIsLoading(true);
     evt.preventDefault();
     fetch(url, {
       method: "POST",
-      body: input,
+      body: `{"text": "${input}" }`,
       headers: { "Content-Type": "application/json" },
     })
       .then(response => {
+        setAPIResponse(response.status);
         if (response.ok) {
           return response.json();
         }
-        setAPIResponse(response.status);
+        setIsLoading(false);
       })
       .then(feedback => {
-        console.log(feedback.result.sentences);
-        setAIfeedback(feedback); // Output the results - converted to JSON format
+        setAIfeedback(feedback.result.sentences);
+        setIsLoading(false);
       });
   };
 
