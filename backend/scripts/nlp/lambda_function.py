@@ -4,53 +4,55 @@ and it will not work without modification"""
 import json
 import nltk
 import requests
-nltk.download('punkt')
+nltk.data.path.append("/tmp")
+
+nltk.download('punkt', download_dir="/tmp")
 
 
 
 
 
-def lambda_handler(event=None, context=None):
-    sentence = "Who am I"
-    # sentence = event["sentence"]
-    
-    print(sentence)
-    tokens = nltk.word_tokenize(sentence.lower())
-    tokenlist = ''
-    firstword = tokens[0]
-    print(firstword)
-    
-    isQuestion = False
-
-    
-    
-    for s in tokens:
-        tokenlist += s
-
-    print(tokenlist)
+def lambda_handler(event, context):
+    answer = {}
+    invalidReq = False
+    try:
+        sentence = event["sentence"]
+    except:
+        answer = {
+            "error": "not a valid input"
+        }
+        invalidReq = True
+    if not invalidReq:
         
-    if '?' in tokenlist:
-        isQuestion = True
-    
-    wh_question = ['what', 'when', 'where', 'who',
-                    'whom', 'which', 'whose', 'why', 'how']
-    yN_question = ["am", "is", "are", "do", "does", "did", "have", "has", "was", "were", "can", "cannot", "could",
-                    "couldn't", "dare", "may", "might", "must", "need", "ought", "shall", "should", "shouldn't", "will", "would"]
-    
-    if firstword in wh_question or firstword in yN_question:
-        isQuestion = True
-    print(isQuestion)
-    
-    answer = ''
-    if (isQuestion):
-        answer = 'This is a question'
-    else:
-        answer = "This is not a question"
+        tokens = nltk.word_tokenize(sentence.lower())
+        tokenlist = ''
+        firstword = tokens[0]
+        
+        isQuestion = False
 
-    return answer
-    # return {
-    #     'statusCode': 200,
-    #     'answer': answer
-    #     # 'body': json.dumps(answer)
-    # }
-print(lambda_handler())
+        
+        
+        for s in tokens:
+            tokenlist += s
+
+
+            
+        if '?' in tokenlist:
+            isQuestion = True
+        
+        wh_question = ['what', 'when', 'where', 'who',
+                        'whom', 'which', 'whose', 'why', 'how']
+        yN_question = ["am", "is", "are", "do", "does", "did", "have", "has", "was", "were", "can", "cannot", "could",
+                        "couldn't", "dare", "may", "might", "must", "need", "ought", "shall", "should", "shouldn't", "will", "would"]
+        
+        if firstword in wh_question or firstword in yN_question:
+            isQuestion = True
+        
+        answer = False
+        if (isQuestion):
+            answer = True
+
+        
+    return {
+        'answer': answer
+    }
