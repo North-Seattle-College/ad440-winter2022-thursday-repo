@@ -12,7 +12,7 @@ import boto3
 
 client = boto3.client('s3')
 response = client.list_buckets()
-    print(response)
+print(response)
 for name in response['Buckets']:
     print(name['Name'])
 for bucket in response['Buckets']:
