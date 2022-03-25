@@ -35,8 +35,8 @@ def main():
 def delete_all_functions(client, response):
     #Delete all the lambda in the selected region.
     for function in response['Functions']:
-        response = client.delete_function(FunctionName=function)
-        print("All the lambda resources have been deleted")
+        response = client.delete_function(FunctionName=function['FunctionName'])
+    print("All the lambda resources have been deleted")
 
 # This function deletes only the lambda function that was entered  command line argument
 def delete_function(client, functionName, response):
