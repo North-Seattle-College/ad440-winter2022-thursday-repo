@@ -10,11 +10,11 @@
 
 import boto3
 
-client = boto3.client('s3')
-response = client.list_buckets()
-print(response)
-for name in response['Buckets']:
-    print(name['Name'])
+s3 = boto3.response('s3')
+s3client = boto3.client('s3')
+response = s3client.list_buckets()
+for bucket in response["Buckets"]:
+    print(bucket['Name'])  
 for bucket in response['Buckets']:
     s3 = boto3.resource('s3')
     s3_bucket = s3.Bucket(bucket['Name'])
