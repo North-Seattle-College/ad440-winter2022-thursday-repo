@@ -42,9 +42,9 @@ def delete_all_apis(client, response):
     client :The boto3 client object
     response :The response object from the list_apis function
     """
-#     for api in response['items']:
-#         response = client.delete_rest_api(restApiId=api['id'])
-#         print("All the api gateways in the selected region have been deleted")
+    for api in response['items']:
+        response = client.delete_rest_api(restApiId=api['id'])
+        print("All the api gateways in the selected region have been deleted")
 
 
 # # run the main function
