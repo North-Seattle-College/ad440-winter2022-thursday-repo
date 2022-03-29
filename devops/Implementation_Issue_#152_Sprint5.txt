@@ -1,0 +1,20 @@
+Implementation Issue 152 Sprint 5:
+
+Issue #152 Run the deletion script for S3 buckets resources to clean up AWS
+
+Research
+
+Write python scripts
+
+Create branch in repository
+issue_#152_Run_the_deletion_script_for_S3_buckets_resources_to_clean_up_AWS
+
+Create file
+Issue152Sprint5DeleteAllS3Buckets.py for deleting all s3 buckets
+
+Put files into branch made
+
+Do a git pull (to update your local)
+
+Testing to be done see directions for testing script
+
