@@ -47,7 +47,7 @@ def main(input_initials):
     initials = args.input_initials
     logger.info("Your Initials Entered: " + initials + "\n")
 
-    #Gererates unique id
+    #Generates unique id
     unique_id = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(5))
 
     #Gets the date
@@ -105,7 +105,7 @@ def _stack_template_file():
         stack_template = fd.read()
     return stack_template
 
-# Verifies if stack already exists
+#Verifies if stack already exists
 def _stack_exists(stack_name):
     paginator = cf_client.get_paginator('list_stacks')
     for page in paginator.paginate():
